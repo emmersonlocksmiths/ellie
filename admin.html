@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ellie Custom Gifts — Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#6f533d">
+<link rel="icon" href="elephant.png">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Archivo+Black&family=Poppins:wght@700&family=Chewy&family=Pacifico&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f0ec; --card:#fff; --brown:#6f533d; --brown-d:#563f2d; --brown-l:#a88c74; --line:#e6ddd5;
+  --ink:#3b2f26; --muted:#8a7a6d; --red:#b3262e; --green:#2f7a45; --amber:#c98a1a; --blue:#3a6ea5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{font-family:Nunito,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45;font-size:15px;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,select,textarea{font:inherit;color:inherit}
+a{color:var(--brown)}
+.hand{font-family:"Patrick Hand",cursive;font-weight:400}
+
+/* login */
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}
+.login-card{background:var(--card);border-radius:22px;padding:34px 30px;width:min(380px,100%);box-shadow:0 20px 50px -20px rgba(86,63,45,.35);text-align:center}
+.login-card img{width:200px;margin:0 auto 6px}
+.login-card h1{font-family:"Patrick Hand",cursive;font-weight:400;font-size:28px;color:var(--brown-d);margin-bottom:16px}
+.login-card form{display:flex;flex-direction:column;gap:10px;text-align:left}
+.login-card .err{color:var(--red);font-size:13px;min-height:18px}
+
+/* layout */
+.top{background:var(--brown-d);color:#fff;position:sticky;top:0;z-index:20}
+.top .in{max-width:1180px;margin:0 auto;padding:0 18px;display:flex;align-items:center;gap:18px;height:62px}
+.top .brand{display:flex;align-items:center;gap:10px;font-family:"Patrick Hand",cursive;font-size:24px;white-space:nowrap}
+.top .brand img{height:34px;filter:brightness(0) invert(1)}
+.tabs{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}
+.tabs button{padding:8px 14px;border-radius:999px;font-weight:700;color:#e9dfd6;white-space:nowrap;position:relative}
+.tabs button.on{background:#fff;color:var(--brown-d)}
+.tabs .dot{position:absolute;top:2px;right:2px;background:var(--red);color:#fff;border-radius:999px;font-size:10px;min-width:17px;height:17px;display:grid;place-items:center;padding:0 4px}
+.top .right{display:flex;gap:8px;align-items:center}
+.top .right a,.top .right button{color:#fff;font-weight:700;font-size:13px;text-decoration:none;padding:7px 12px;border:1px solid rgba(255,255,255,.35);border-radius:999px;white-space:nowrap}
+.demo-bar{background:#fff4dc;color:#7a5410;text-align:center;font-size:13px;padding:7px 12px;font-weight:700}
+main{max-width:1180px;margin:0 auto;padding:24px 18px 80px}
+h2.title{font-family:"Patrick Hand",cursive;font-weight:400;font-size:34px;color:var(--brown-d);display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px;flex-wrap:wrap}
+p.sub{color:var(--muted);margin-bottom:18px;font-size:14px}
+
+/* controls */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;font-weight:800;font-size:14px;background:var(--brown);color:#fff;transition:background .15s}
+.btn:hover{background:var(--brown-d)}
+.btn.ghost{background:#fff;color:var(--brown);border:1.5px solid var(--line)}
+.btn.ghost:hover{border-color:var(--brown-l)}
+.btn.danger{background:var(--red)}
+.btn.sm{padding:6px 12px;font-size:12.5px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.inp,select.inp,textarea.inp{border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff;outline:none;width:100%;font-size:14px}
+.inp:focus{border-color:var(--brown)}
+textarea.inp{resize:vertical;min-height:60px}
+label.fl{display:block;font-size:12px;font-weight:800;color:var(--brown);margin-bottom:4px}
+.switch{position:relative;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;user-select:none}
+.switch input{appearance:none;width:38px;height:22px;border-radius:999px;background:#d8cdc3;position:relative;transition:background .2s;cursor:pointer;flex:none}
+.switch input::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.switch input:checked{background:var(--green)}
+.switch input:checked::after{left:19px}
+.card{background:var(--card);border-radius:16px;border:1px solid var(--line);padding:16px}
+.grid{display:grid;gap:12px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.stat b{display:block;font-size:26px;color:var(--brown-d);line-height:1.1}
+.stat span{font-size:12.5px;color:var(--muted);font-weight:700}
+
+/* orders */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.chip{padding:6px 12px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-weight:700;font-size:13px}
+.chip.on{background:var(--brown);border-color:var(--brown);color:#fff}
+.filters .inp{max-width:240px;margin-left:auto}
+.order{margin-bottom:12px}
+.order-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;cursor:pointer}
+.order-head .oid{font-weight:800;color:var(--brown-d);font-size:16px;letter-spacing:.03em}
+.order-head .who{flex:1;min-width:160px}
+.order-head .who small{display:block;color:var(--muted);font-size:12.5px}
+.order-head .amt{font-weight:800;font-size:17px;color:var(--brown-d)}
+.pill{padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap}
+.st-New{background:#fde8e8;color:var(--red)} .st-Confirmed{background:#e6eefb;color:var(--blue)} .st-Printing{background:#fff1d9;color:var(--amber)}
+.st-Ready{background:#e3f4e8;color:var(--green)} .st-Completed{background:#eee;color:#666} .st-Cancelled{background:#eee;color:#999;text-decoration:line-through}
+.paid{background:#e3f4e8;color:var(--green)} .unpaid{background:#fff1d9;color:var(--amber)}
+.order-body{border-top:1px dashed var(--line);margin-top:14px;padding-top:14px;display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+.items{display:flex;flex-direction:column;gap:8px}
+.it{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;background:#faf7f4;border-radius:12px;padding:8px 10px}
+.it svg{width:56px;height:auto}
+.it h4{font-size:15px;color:var(--brown-d)}
+.it .d{font-size:12.5px;color:var(--muted)}
+.it .q{font-weight:800;text-align:right;white-space:nowrap}
+.kv{font-size:14px;display:grid;grid-template-columns:90px 1fr;gap:4px 10px;margin-bottom:12px}
+.kv dt{color:var(--muted);font-weight:700}
+.kv dd{word-break:break-word}
+.tot .row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:3px}
+.tot .row.big{font-weight:800;font-size:16px;color:var(--brown-d);border-top:1px solid var(--line);padding-top:6px;margin-top:6px}
+.order-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.empty{text-align:center;color:var(--muted);padding:50px 10px}
+.empty img{width:90px;margin:0 auto 10px;opacity:.6}
+
+/* editable lists */
+.list{display:flex;flex-direction:column;gap:10px}
+.prow{display:grid;grid-template-columns:84px 1fr;gap:14px;align-items:start}
+.prow .thumb{width:84px;height:84px;background:#faf7f4;border-radius:12px;display:grid;place-items:center;padding:6px}
+.prow .thumb svg{width:100%;height:100%}
+.fields{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
+.fields .wide{grid-column:1/-1}
+.toggles{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.row-tools{display:flex;gap:6px;margin-left:auto;align-items:center}
+.icon-btn{width:32px;height:32px;border-radius:9px;border:1.5px solid var(--line);background:#fff;color:var(--brown);font-weight:800;display:inline-grid;place-items:center}
+.icon-btn:hover{border-color:var(--brown-l)}
+.icon-btn.del:hover{color:var(--red);border-color:var(--red)}
+.tag{font-size:11.5px;font-weight:800;background:#f1ebe5;color:var(--brown);border-radius:999px;padding:3px 9px}
+.inactive{opacity:.55}
+.crow{display:grid;grid-template-columns:52px 1.4fr 1fr 1fr .7fr auto;gap:10px;align-items:center}
+.crow input[type=color]{width:52px;height:44px;border:1.5px solid var(--line);border-radius:12px;padding:3px;background:#fff;cursor:pointer}
+.ctoggles{grid-column:2/-1;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.add-panel{background:#fbf8f5;border:2px dashed var(--line);border-radius:16px;padding:16px;margin-bottom:16px}
+.add-panel h3{font-size:16px;color:var(--brown-d);margin-bottom:10px}
+.confirm{display:inline-flex;gap:6px;align-items:center;font-size:12.5px;font-weight:800;color:var(--red)}
+
+/* settings */
+.fontpick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fontpick.f3{grid-template-columns:repeat(3,1fr)}
+.fopt{border:2px solid var(--line);border-radius:14px;padding:10px 12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;background:#fff;color:var(--brown-d)}
+.fopt.on{border-color:var(--brown);background:#fbf8f5}
+.fopt input{display:none}
+.fopt small{font-size:11.5px;color:var(--muted);font-weight:700}
+.set-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.set-grid .card h3{font-size:16px;color:var(--brown-d);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.set-grid .card .grid{grid-template-columns:1fr 1fr}
+.set-grid .card .full{grid-column:1/-1}
+.help{font-size:12.5px;color:var(--muted);margin-top:4px}
+.savebar{position:sticky;bottom:14px;display:flex;justify-content:flex-end;margin-top:16px}
+.savebar .btn{box-shadow:0 10px 24px -8px rgba(86,63,45,.6);padding:12px 26px;font-size:15px}
+
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,30px);background:var(--brown-d);color:#fff;padding:11px 20px;border-radius:999px;font-weight:700;opacity:0;transition:.25s;z-index:70;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.modal{position:fixed;inset:0;background:rgba(59,47,38,.45);display:grid;place-items:center;z-index:60;padding:20px}
+.modal .card{width:min(560px,100%)}
+
+@media (max-width:860px){
+  .stats{grid-template-columns:1fr 1fr}
+  .order-body{grid-template-columns:1fr}
+  .fields{grid-template-columns:1fr 1fr}
+  .set-grid{grid-template-columns:1fr}
+  .crow{grid-template-columns:52px 1fr 1fr}
+  .crow .cost,.crow .brand{display:none}
+  .top .brand span{display:none}
+}
+@media (max-width:520px){
+  .fields,.set-grid .card .grid{grid-template-columns:1fr}
+  .prow{grid-template-columns:64px 1fr}
+  .prow .thumb{width:64px;height:64px}
+  .filters .inp{max-width:none;margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN (Firebase mode) -->
+<div class="login" id="login" hidden>
+  <div class="login-card">
+    <img src="logo_h.png" alt="Ellie Custom Gifts">
+    <h1>Shop admin</h1>
+    <form id="loginForm">
+      <div><label class="fl" for="lEmail">Email</label><input class="inp" id="lEmail" type="email" autocomplete="username" required></div>
+      <div><label class="fl" for="lPass">Password</label><input class="inp" id="lPass" type="password" autocomplete="current-password" required></div>
+      <div class="err" id="lErr"></div>
+      <button class="btn" type="submit" style="justify-content:center">Sign in</button>
+    </form>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" hidden>
+  <div class="top"><div class="in">
+    <div class="brand"><img src="elephant.png" alt=""><span>Admin</span></div>
+    <nav class="tabs" id="tabs">
+      <button data-tab="orders" class="on">Orders<span class="dot" id="newDot" hidden></span></button>
+      <button data-tab="products">Products</button>
+      <button data-tab="colours">Colours &amp; filament</button>
+      <button data-tab="scenes">Scenes</button>
+      <button data-tab="settings">Settings</button>
+    </nav>
+    <div class="right"><a href="index.html" target="_blank" rel="noopener">View shop ↗</a><button id="logout">Sign out</button></div>
+  </div></div>
+  <div class="demo-bar" id="demoBar" hidden>Demo mode: changes are saved in this browser only. Add your Firebase details to shared.js to go live.</div>
+  <main>
+    <section id="tab-orders"></section>
+    <section id="tab-products" hidden></section>
+    <section id="tab-colours" hidden></section>
+    <section id="tab-scenes" hidden></section>
+    <section id="tab-settings" hidden></section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<div id="modalHost"></div>
+
+<script src="shared.js"></script>
+<script>
+/* =========================================================
+   ADMIN PAGE
+   ========================================================= */
+const $ = s => document.querySelector(s);
+let tt;
+function toast(msg){ const t = $("#toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 2000); }
+const fmtDate = iso => { try{ return new Date(iso).toLocaleString("en-AU", { day:"numeric", month:"short", hour:"numeric", minute:"2-digit" }); }catch(e){ return iso; } };
+const num = v => v === "" || v == null || isNaN(Number(v)) ? null : Math.round(Number(v) * 100) / 100;
+async function safe(fn, ok = "Saved"){ try{ await fn(); if(ok) toast(ok); return true; }catch(e){ console.error(e); toast("Couldn't save: " + (e.message || "check your connection")); return false; } }
+
+/* ---------- tabs ---------- */
+let tab = "orders";
+$("#tabs").addEventListener("click", e => {
+  const b = e.target.closest("[data-tab]"); if(!b) return;
+  tab = b.dataset.tab;
+  document.querySelectorAll("#tabs button").forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll("main > section").forEach(s => s.hidden = s.id !== "tab-" + tab);
+  render();
+});
+function render(){ ({ orders: renderOrders, products: renderProducts, colours: renderColours, scenes: renderScenes, settings: renderSettings })[tab](); }
+
+/* =========================================================
+   ORDERS
+   ========================================================= */
+let orders = [], ofilter = "Open", osearch = "", openIds = new Set();
+async function loadOrders(){ orders = await DB.listOrders(); const n = orders.filter(o => o.status === "New").length; $("#newDot").hidden = !n; $("#newDot").textContent = n; }
+function orderTotal(o){ return o.totals && o.totals.total; }
+function renderOrders(){
+  const live = orders.filter(o => o.status !== "Cancelled");
+  const open = live.filter(o => o.status !== "Completed");
+  const toPrint = open.filter(o => ["New","Confirmed","Printing"].includes(o.status)).reduce((s, o) => s + (o.totals?.ornaments || 0), 0);
+  const unpaid = live.filter(o => !o.paid).reduce((s, o) => s + (orderTotal(o) || 0), 0);
+  const paid = live.filter(o => o.paid).reduce((s, o) => s + (orderTotal(o) || 0), 0);
+  const counts = s => s === "Open" ? open.length : s === "All" ? orders.length : orders.filter(o => o.status === s).length;
+  let list = ofilter === "All" ? orders : ofilter === "Open" ? open : orders.filter(o => o.status === ofilter);
+  if(osearch){ const q = osearch.toLowerCase(); list = list.filter(o => JSON.stringify([o.id, o.customer, o.items.map(itemTitle)]).toLowerCase().includes(q)); }
+  $("#tab-orders").innerHTML = `
+    <h2 class="title">Orders <button class="btn ghost sm" id="refresh">↻ Refresh</button></h2>
+    <p class="sub">New orders land here. Open one to see what to print, then move it along as you go.</p>
+    <div class="stats">
+      <div class="stat"><b>${open.length}</b><span>Open orders</span></div>
+      <div class="stat"><b>${toPrint}</b><span>Ornaments to print</span></div>
+      <div class="stat"><b>${money(unpaid)}</b><span>Waiting on payment</span></div>
+      <div class="stat"><b>${money(paid)}</b><span>Paid so far</span></div>
+    </div>
+    <div class="filters">
+      ${["Open", ...ORDER_STATUSES, "All"].map(s => `<button class="chip ${ofilter===s?"on":""}" data-f="${s}">${s} (${counts(s)})</button>`).join("")}
+      <input class="inp" id="osearch" placeholder="Search name, order no…" value="${esc(osearch)}">
+    </div>
+    <div id="olist">${list.length ? list.map(orderCard).join("") : `<div class="empty"><img src="elephant.png" alt=""><p>No orders here yet.</p></div>`}</div>`;
+  fitNames($("#tab-orders"));
+}
+function orderCard(o){
+  const t = o.totals || {}, isOpen = openIds.has(o.id);
+  return `<div class="card order" data-oid="${esc(o.id)}">
+    <div class="order-head" data-toggle="${esc(o.id)}">
+      <span class="oid">${esc(o.id)}</span>
+      <span class="pill st-${esc(o.status)}">${esc(o.status)}</span>
+      <span class="pill ${o.paid ? "paid" : "unpaid"}">${o.paid ? "Paid" : "Unpaid"}</span>
+      <div class="who">${esc(o.customer?.name)}<small>${fmtDate(o.createdAt)} · ${t.ornaments || 0} ornament${t.ornaments===1?"":"s"} · ${esc(o.delivery)}</small></div>
+      <span class="amt">${t.total == null ? "TBC" : money(t.total)}</span>
+      <span class="icon-btn">${isOpen ? "▴" : "▾"}</span>
+    </div>
+    ${isOpen ? `<div class="order-body">
+      <div>
+        <div class="items">${(o.items||[]).map(i => `<div class="it">${itemSVG(i)}
+          <div><h4>${esc(itemTitle(i))}</h4><div class="d">${esc(itemDesc(i))}<br>${esc(itemColours(i))}</div></div>
+          <div class="q">× ${i.qty}<div class="d">${i.unitPrice==null ? "TBC" : money(i.unitPrice) + " ea"}</div></div></div>`).join("")}</div>
+        <div class="order-actions">
+          <button class="btn ghost sm" data-copy="${esc(o.id)}">📋 Copy print list</button>
+          <button class="btn ghost sm" data-copyc="${esc(o.id)}">✉️ Copy customer details</button>
+        </div>
+      </div>
+      <div>
+        <dl class="kv">
+          <dt>Customer</dt><dd>${esc(o.customer?.name)}</dd>
+          <dt>Mobile</dt><dd><a href="tel:${esc(o.customer?.phone)}">${esc(o.customer?.phone)}</a></dd>
+          <dt>Email</dt><dd><a href="mailto:${esc(o.customer?.email)}">${esc(o.customer?.email)}</a></dd>
+          <dt>Delivery</dt><dd>${esc(o.delivery)}${o.address ? "<br>" + esc(o.address).replace(/\n/g,"<br>") : ""}</dd>
+          ${o.notes ? `<dt>Their notes</dt><dd>${esc(o.notes)}</dd>` : ""}
+        </dl>
+        <div class="tot">
+          <div class="row"><span>${t.ornaments} ornaments</span><span>${money(t.full)}</span></div>
+          ${t.free ? `<div class="row" style="color:var(--red)"><span>Promo (${t.free} free)</span><span>${t.discount==null ? "" : "−" + money(t.discount)}</span></div>` : ""}
+          ${o.delivery === "Post" ? `<div class="row"><span>Postage</span><span>${t.postage==null ? "TBC" : money(t.postage)}</span></div>` : ""}
+          <div class="row big"><span>Total</span><span>${t.total==null ? "TBC" : money(t.total)}</span></div>
+        </div>
+        <div class="grid" style="grid-template-columns:1fr auto;margin-top:12px;align-items:end">
+          <div><label class="fl">Status</label><select class="inp" data-status="${esc(o.id)}">${ORDER_STATUSES.map(s => `<option ${s===o.status?"selected":""}>${s}</option>`).join("")}</select></div>
+          <label class="switch" style="padding-bottom:8px"><input type="checkbox" data-paid="${esc(o.id)}" ${o.paid?"checked":""}> Paid</label>
+        </div>
+        <div style="margin-top:10px"><label class="fl">Your notes (customers never see these)</label><textarea class="inp" data-anotes="${esc(o.id)}" placeholder="Invoice sent, pickup Tuesday…">${esc(o.adminNotes)}</textarea></div>
+        <div class="order-actions" style="justify-content:flex-end"><span data-delwrap="${esc(o.id)}"><button class="btn ghost sm" data-delask="${esc(o.id)}">Delete order</button></span></div>
+      </div>
+    </div>` : ""}
+  </div>`;
+}
+function printList(o){
+  return `${o.id} - ${o.customer?.name}\n` + o.items.map(i => `${i.qty} x ${itemDesc(i)}\n   ${itemType(i)==="family" ? (i.names||[]).join(" / ") : '"' + i.name + '"'}\n   Colours: ${itemColours(i)}`).join("\n");
+}
+async function copyText(txt){
+  try{ await navigator.clipboard.writeText(txt); toast("Copied"); }
+  catch(e){ showModal(`<h3 style="margin-bottom:8px">Copy this</h3><textarea class="inp" style="min-height:200px" readonly>${esc(txt)}</textarea><div style="text-align:right;margin-top:10px"><button class="btn" data-mclose>Done</button></div>`); }
+}
+function showModal(html){ $("#modalHost").innerHTML = `<div class="modal"><div class="card">${html}</div></div>`; }
+document.addEventListener("click", e => { if(e.target.closest("[data-mclose]") || e.target.classList.contains("modal")) $("#modalHost").innerHTML = ""; });
+
+$("#tab-orders").addEventListener("click", async e => {
+  const t = e.target;
+  if(t.closest("[data-f]")){ ofilter = t.closest("[data-f]").dataset.f; return renderOrders(); }
+  if(t.id === "refresh"){ await loadOrders(); renderOrders(); return toast("Up to date"); }
+  if(t.closest("select,input,textarea,a,button[data-copy],button[data-copyc],[data-delwrap]")){
+    const o = id => orders.find(x => x.id === id);
+    if(t.dataset.copy) copyText(printList(o(t.dataset.copy)));
+    if(t.dataset.copyc){ const c = o(t.dataset.copyc); copyText(`${c.customer.name}\n${c.customer.phone}\n${c.customer.email}${c.address ? "\n" + c.address : ""}`); }
+    if(t.dataset.delask) t.parentElement.innerHTML = `<span class="confirm">Delete for good? <button class="btn danger sm" data-del="${t.dataset.delask}">Yes, delete</button><button class="btn ghost sm" data-delno>No</button></span>`;
+    if(t.dataset.del){ await safe(() => DB.deleteOrder(t.dataset.del), "Order deleted"); await loadOrders(); renderOrders(); }
+    if(t.dataset.delno !== undefined) renderOrders();
+    return;
+  }
+  const h = t.closest("[data-toggle]");
+  if(h){ const id = h.dataset.toggle; openIds.has(id) ? openIds.delete(id) : openIds.add(id); renderOrders(); }
+});
+$("#tab-orders").addEventListener("change", async e => {
+  const t = e.target;
+  if(t.dataset.status){ const o = orders.find(x => x.id === t.dataset.status); o.status = t.value; await safe(() => DB.updateOrder(o.id, { status: o.status }), "Status updated"); await loadOrders(); renderOrders(); }
+  if(t.dataset.paid){ const o = orders.find(x => x.id === t.dataset.paid); o.paid = t.checked; await safe(() => DB.updateOrder(o.id, { paid: o.paid }), o.paid ? "Marked as paid" : "Marked as unpaid"); renderOrders(); }
+  if(t.dataset.anotes){ const o = orders.find(x => x.id === t.dataset.anotes); o.adminNotes = t.value; await safe(() => DB.updateOrder(o.id, { adminNotes: o.adminNotes }), "Note saved"); }
+});
+$("#tab-orders").addEventListener("input", e => { if(e.target.id === "osearch"){ osearch = e.target.value; const pos = e.target.selectionStart; renderOrders(); const s = $("#osearch"); s.focus(); s.setSelectionRange(pos, pos); } });
+
+/* =========================================================
+   PRODUCTS
+   ========================================================= */
+let delAsk = null;
+function sampleItem(p){
+  const c = CAT.colours.filter(x => x.inStock), b = (c[0]||{}).id, tx = (c.find(x => x.id !== b)||{}).id;
+  return p.type === "family" ? { type:"family", productId:p.id, names:["ANNA","JAMES","LILY"], year: p.yearOption ? "2026" : "", base:b, text:tx }
+    : { type:p.type, productId:p.id, style:(CAT.scenes.find(s => s.active)||{}).id, name:"Name", base:b, text:tx, year:"" };
+}
+function renderProducts(){
+  $("#tab-products").innerHTML = `
+    <h2 class="title">Products</h2>
+    <p class="sub">Prices, what's for sale and what customers can choose. Changes save as you go and show in the shop straight away. Leave the price empty to show "Price TBC".</p>
+    <div class="add-panel">
+      <h3>➕ Add a product</h3>
+      <div class="fields">
+        <div><label class="fl">Name</label><input class="inp" id="npName" placeholder="e.g. Teacher Star"></div>
+        <div><label class="fl">Design template</label><select class="inp" id="npType">${TEMPLATES.map(t => `<option value="${t.id}">${esc(t.name)}</option>`).join("")}</select></div>
+        <div><label class="fl">Price ($)</label><input class="inp" id="npPrice" type="number" step="0.01" min="0" placeholder="TBC"></div>
+        <div class="wide"><label class="fl">Short description (shows on the preview)</label><input class="inp" id="npDesc" placeholder="e.g. 90 mm star, made to order"></div>
+        <div class="wide" id="npPhotoWrap" hidden><label class="fl">Photo of the product</label><input type="file" accept="image/*" id="npPhoto"><div class="help">Customers will see this photo with their name on it.</div></div>
+      </div>
+      <div class="help" id="npNote">${esc(TEMPLATES[0].note)}</div>
+      <div style="margin-top:12px"><button class="btn" id="npAdd">Add product</button></div>
+    </div>
+    <div class="list">${CAT.products.map((p, i) => `
+      <div class="card prow ${p.active ? "" : "inactive"}" data-pid="${esc(p.id)}">
+        <div class="thumb">${itemSVG(sampleItem(p))}</div>
+        <div>
+          <div class="fields">
+            <div><label class="fl">Name</label><input class="inp" data-k="name" value="${esc(p.name)}"></div>
+            <div><label class="fl">Price ($)</label><input class="inp" data-k="price" type="number" step="0.01" min="0" value="${p.price ?? ""}" placeholder="TBC"></div>
+            <div><label class="fl">Max names</label><input class="inp" data-k="maxNames" type="number" min="1" max="12" value="${p.maxNames ?? ""}"></div>
+            <div class="wide"><label class="fl">Short description</label><input class="inp" data-k="description" value="${esc(p.description)}"></div>
+            ${p.type === "photo" ? `<div class="wide"><label class="fl">Product photo</label><input type="file" accept="image/*" data-photo="${esc(p.id)}"></div>` : ""}
+          </div>
+          <div class="toggles">
+            <label class="switch"><input type="checkbox" data-k="active" ${p.active?"checked":""}> For sale</label>
+            <label class="switch"><input type="checkbox" data-k="yearOption" ${p.yearOption?"checked":""}> Year option</label>
+            <span class="tag">${esc((TEMPLATES.find(t => t.id === p.type)||{name:p.type}).name)}</span>
+            <div class="row-tools">
+              <button class="icon-btn" data-move="-1" ${i===0?"disabled":""} title="Move up">↑</button>
+              <button class="icon-btn" data-move="1" ${i===CAT.products.length-1?"disabled":""} title="Move down">↓</button>
+              ${delAsk === "p:" + p.id ? `<span class="confirm">Delete? <button class="btn danger sm" data-delyes>Yes</button><button class="btn ghost sm" data-delno>No</button></span>` : `<button class="icon-btn del" data-delask title="Delete">🗑</button>`}
+            </div>
+          </div>
+        </div>
+      </div>`).join("")}</div>`;
+  fitNames($("#tab-products"));
+}
+function resizeImage(file, max = 600){
+  return new Promise((ok, bad) => {
+    const r = new FileReader();
+    r.onload = () => { const img = new Image(); img.onload = () => {
+      const s = Math.min(1, max / Math.max(img.width, img.height)), c = document.createElement("canvas");
+      c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); ok(c.toDataURL("image/jpeg", 0.8)); };
+      img.onerror = bad; img.src = r.result; };
+    r.onerror = bad; r.readAsDataURL(file);
+  });
+}
+async function moveItem(kind, id, dir){
+  const list = CAT[kind], i = list.findIndex(x => x.id === id), j = i + dir;
+  if(j < 0 || j >= list.length) return;
+  [list[i], list[j]] = [list[j], list[i]];
+  list.forEach((x, k) => x.sort = k + 1);
+  const a = { ...list[i] }, b = { ...list[j] };
+  await safe(async () => { await DB.saveItem(kind, a); await DB.saveItem(kind, b); }, "Order updated");
+}
+$("#tab-products").addEventListener("change", async e => {
+  const t = e.target, row = t.closest("[data-pid]");
+  if(t.id === "npType"){ $("#npPhotoWrap").hidden = t.value !== "photo"; $("#npNote").textContent = TEMPLATES.find(x => x.id === t.value).note; return; }
+  if(!row) return;
+  const p = { ...prod(row.dataset.pid) };
+  if(t.dataset.photo && t.files[0]){ p.image = await resizeImage(t.files[0]); await safe(() => DB.saveItem("products", p), "Photo saved"); return renderProducts(); }
+  const k = t.dataset.k; if(!k) return;
+  p[k] = t.type === "checkbox" ? t.checked : (k === "price" ? num(t.value) : k === "maxNames" ? (parseInt(t.value) || null) : t.value.trim());
+  if(k === "name" && !p.name) return toast("Name can't be empty");
+  await safe(() => DB.saveItem("products", p));
+  if(t.type === "checkbox") renderProducts();
+});
+$("#tab-products").addEventListener("click", async e => {
+  const t = e.target, row = t.closest("[data-pid]");
+  if(t.id === "npAdd"){
+    const name = $("#npName").value.trim(); if(!name) return toast("Give the product a name");
+    let id = slug(name); while(CAT.products.find(p => p.id === id)) id += "-2";
+    const type = $("#npType").value;
+    const p = { id, name, type, price: num($("#npPrice").value), active: true, yearOption: type !== "photo", maxNames: type === "family" ? 6 : 12,
+      sort: CAT.products.length + 1, description: $("#npDesc").value.trim() };
+    if(type === "photo"){ const f = $("#npPhoto").files[0]; if(!f) return toast("Add a photo of the product"); p.image = await resizeImage(f); }
+    if(await safe(() => DB.saveItem("products", p), `${name} added`)) renderProducts();
+    return;
+  }
+  if(!row) return;
+  const id = row.dataset.pid;
+  if(t.dataset.move){ await moveItem("products", id, +t.dataset.move); renderProducts(); }
+  if(t.dataset.delask !== undefined){ delAsk = "p:" + id; renderProducts(); }
+  if(t.dataset.delno !== undefined){ delAsk = null; renderProducts(); }
+  if(t.dataset.delyes !== undefined){ delAsk = null; await safe(() => DB.deleteItem("products", id), "Product deleted"); renderProducts(); }
+});
+
+/* =========================================================
+   COLOURS & FILAMENT
+   ========================================================= */
+const MATERIALS = ["PLA","PLA Matte","PLA Silk","PLA Wood","PLA Glitter","PLA Glow","PETG","Other"];
+function renderColours(){
+  const inStock = CAT.colours.filter(c => c.inStock).length;
+  $("#tab-colours").innerHTML = `
+    <h2 class="title">Colours &amp; filament</h2>
+    <p class="sub">The colours customers can pick. Turn off "In stock" when a spool runs out and it disappears from the shop. ${inStock} of ${CAT.colours.length} in stock.</p>
+    <div class="add-panel">
+      <h3>➕ Add a colour</h3>
+      <div class="crow">
+        <input type="color" id="ncHex" value="#2f5d3a">
+        <div><label class="fl">Name customers see</label><input class="inp" id="ncName" placeholder="e.g. Candy Cane Red"></div>
+        <div><label class="fl">Material</label><select class="inp" id="ncMat">${MATERIALS.map(m => `<option>${m}</option>`).join("")}</select></div>
+        <div class="brand"><label class="fl">Brand</label><input class="inp" id="ncBrand" placeholder="e.g. Bambu"></div>
+        <div class="cost"><label class="fl">$ per kg</label><input class="inp" id="ncCost" type="number" step="0.01" value="24"></div>
+        <button class="btn" id="ncAdd" style="align-self:end">Add</button>
+      </div>
+    </div>
+    <div class="list">${CAT.colours.map((c, i) => `
+      <div class="card ${c.inStock ? "" : "inactive"}" data-cid="${esc(c.id)}">
+        <div class="crow">
+          <input type="color" data-k="hex" value="${esc(c.hex)}" title="Colour on screen">
+          <div><label class="fl">Name customers see</label><input class="inp" data-k="name" value="${esc(c.name)}"></div>
+          <div><label class="fl">Material</label><select class="inp" data-k="material">${[...new Set([...MATERIALS, c.material||"PLA"])].map(m => `<option ${m===c.material?"selected":""}>${esc(m)}</option>`).join("")}</select></div>
+          <div class="brand"><label class="fl">Brand</label><input class="inp" data-k="brand" value="${esc(c.brand)}"></div>
+          <div class="cost"><label class="fl">$ per kg</label><input class="inp" data-k="costPerKg" type="number" step="0.01" value="${c.costPerKg ?? ""}"></div>
+          <div></div>
+          <div class="ctoggles">
+            <label class="switch"><input type="checkbox" data-k="inStock" ${c.inStock?"checked":""}> In stock</label>
+            <label class="switch"><input type="checkbox" data-k="forBase" ${c.forBase?"checked":""}> Ornament colour</label>
+            <label class="switch"><input type="checkbox" data-k="forText" ${c.forText?"checked":""}> Name colour</label>
+            <div class="row-tools">
+              <button class="icon-btn" data-move="-1" ${i===0?"disabled":""} title="Move up">↑</button>
+              <button class="icon-btn" data-move="1" ${i===CAT.colours.length-1?"disabled":""} title="Move down">↓</button>
+              ${delAsk === "c:" + c.id ? `<span class="confirm">Delete? <button class="btn danger sm" data-delyes>Yes</button><button class="btn ghost sm" data-delno>No</button></span>` : `<button class="icon-btn del" data-delask title="Delete">🗑</button>`}
+            </div>
+          </div>
+        </div>
+      </div>`).join("")}</div>`;
+}
+$("#tab-colours").addEventListener("change", async e => {
+  const t = e.target, row = t.closest("[data-cid]"); if(!row || !t.dataset.k) return;
+  const c = { ...col(row.dataset.cid) }, k = t.dataset.k;
+  c[k] = t.type === "checkbox" ? t.checked : k === "costPerKg" ? num(t.value) : t.value.trim();
+  if(k === "name" && !c.name) return toast("Name can't be empty");
+  await safe(() => DB.saveItem("colours", c));
+  if(t.type === "checkbox") renderColours();
+});
+$("#tab-colours").addEventListener("click", async e => {
+  const t = e.target, row = t.closest("[data-cid]");
+  if(t.id === "ncAdd"){
+    const name = $("#ncName").value.trim(); if(!name) return toast("Give the colour a name");
+    let id = slug(name); while(CAT.colours.find(c => c.id === id)) id += "-2";
+    const c = { id, name, hex: $("#ncHex").value, material: $("#ncMat").value, brand: $("#ncBrand").value.trim(), costPerKg: num($("#ncCost").value),
+      forBase: true, forText: true, inStock: true, sort: CAT.colours.length + 1 };
+    if(await safe(() => DB.saveItem("colours", c), `${name} added`)) renderColours();
+    return;
+  }
+  if(!row) return;
+  const id = row.dataset.cid;
+  if(t.dataset.move){ await moveItem("colours", id, +t.dataset.move); renderColours(); }
+  if(t.dataset.delask !== undefined){ delAsk = "c:" + id; renderColours(); }
+  if(t.dataset.delno !== undefined){ delAsk = null; renderColours(); }
+  if(t.dataset.delyes !== undefined){ delAsk = null; await safe(() => DB.deleteItem("colours", id), "Colour deleted"); renderColours(); }
+});
+
+/* =========================================================
+   SCENES (backgrounds for the Name Bauble)
+   ========================================================= */
+function renderScenes(){
+  const c = CAT.colours.filter(x => x.inStock), b = (c[0]||{}).id, tx = (c.find(x => x.id !== b)||{}).id;
+  $("#tab-scenes").innerHTML = `
+    <h2 class="title">Bauble scenes</h2>
+    <p class="sub">The design choices on the Name Bauble. Rename them or switch off any you don't want to offer. Each one matches a design in bauble.scad.</p>
+    <div class="list">${CAT.scenes.map((s, i) => `
+      <div class="card prow ${s.active ? "" : "inactive"}" data-sid="${esc(s.id)}">
+        <div class="thumb">${ornamentSVG({ style:s.id, name:"Name", base:b, text:tx })}</div>
+        <div>
+          <div class="fields"><div class="wide"><label class="fl">Name customers see</label><input class="inp" data-k="name" value="${esc(s.name)}"></div></div>
+          <div class="toggles">
+            <label class="switch"><input type="checkbox" data-k="active" ${s.active?"checked":""}> Offered</label>
+            <div class="row-tools">
+              <button class="icon-btn" data-move="-1" ${i===0?"disabled":""}>↑</button>
+              <button class="icon-btn" data-move="1" ${i===CAT.scenes.length-1?"disabled":""}>↓</button>
+            </div>
+          </div>
+        </div>
+      </div>`).join("")}</div>`;
+  fitNames($("#tab-scenes"));
+}
+$("#tab-scenes").addEventListener("change", async e => {
+  const t = e.target, row = t.closest("[data-sid]"); if(!row || !t.dataset.k) return;
+  const s = { ...sty(row.dataset.sid) };
+  s[t.dataset.k] = t.type === "checkbox" ? t.checked : t.value.trim();
+  if(!s.name) return toast("Name can't be empty");
+  if(t.dataset.k === "active" && !s.active && CAT.scenes.filter(x => x.active).length <= 1){ t.checked = true; return toast("Keep at least one scene on"); }
+  await safe(() => DB.saveItem("scenes", s));
+  if(t.type === "checkbox") renderScenes();
+});
+$("#tab-scenes").addEventListener("click", async e => {
+  const t = e.target, row = t.closest("[data-sid]"); if(!row || !t.dataset.move) return;
+  await moveItem("scenes", row.dataset.sid, +t.dataset.move); renderScenes();
+});
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+function renderSettings(){
+  const s = CAT.settings;
+  const f = (k, label, v, type = "text", extra = "") => `<div class="${extra}"><label class="fl">${label}</label><input class="inp" data-s="${k}" type="${type}" ${type==="number"?'step="0.01" min="0"':""} value="${esc(v ?? "")}"></div>`;
+  $("#tab-settings").innerHTML = `
+    <h2 class="title">Settings</h2>
+    <p class="sub">Shop-wide settings. Press <b>Save settings</b> when you're done.</p>
+    <div class="set-grid">
+      <div class="card"><h3>🏪 Shop</h3><div class="grid">
+        <div class="full"><label class="switch"><input type="checkbox" data-s="shopOpen" ${s.shopOpen?"checked":""}> Taking orders</label><div class="help">Turn off to pause orders. Customers see the message below instead of the designer.</div></div>
+        ${f("closedMessage","Message when orders are paused", s.closedMessage, "text", "full")}
+        ${f("shopName","Shop name", s.shopName)}
+        ${f("contactEmail","Contact email (shown in footer)", s.contactEmail, "email")}
+        ${f("announcement","Top badge on the shop", s.announcement, "text", "full")}
+        <div class="full"><label class="fl">Intro text under the heading</label><textarea class="inp" data-s="tagline">${esc(s.tagline)}</textarea></div>
+        ${f("christmasCutoff","Christmas order cut-off (blank = hide)", s.christmasCutoff, "text", "full")}
+        ${f("maxNameLength","Max letters per name", s.maxNameLength, "number")}
+      </div></div>
+      <div class="card"><h3>✍️ Name fonts</h3>
+        <div class="fontpick f3">${Object.entries(NAME_FONTS).map(([k, nf]) => `
+          <label class="fopt ${s.fontsOn[k] !== false ? "on" : ""}"><input type="checkbox" data-s="fontsOn.${k}" ${s.fontsOn[k] !== false ? "checked" : ""}>
+            <span style="font-family:${nf.css};font-weight:${nf.weight};font-size:${(nf.caps ? 19 : 26)}px">${nf.caps ? "CHARLOTTE" : "Charlotte"}</span><small>${nf.label} · ${nf.font}</small></label>`).join("")}
+        </div>
+        <div class="help">Untick a font to stop offering it. Each order shows the font picked: set the same font_style (script / modern / playful) in the print file.</div>
+      </div>
+      <div class="card"><h3>🎁 Promotion</h3><div class="grid">
+        <div class="full"><label class="switch"><input type="checkbox" data-s="promo.enabled" ${s.promo.enabled?"checked":""}> Promotion on</label></div>
+        ${f("promo.buy","Buy this many…", s.promo.buy, "number")}
+        ${f("promo.free","…get this many free", s.promo.free, "number")}
+        ${f("promo.label","Promo wording customers see", s.promo.label, "text", "full")}
+        <div class="full help">The cheapest ornaments in the order are the free ones. It repeats, so with buy 3 get 1, an order of 8 gets 2 free.</div>
+      </div></div>
+      <div class="card"><h3>🚚 Pickup &amp; postage</h3><div class="grid">
+        <div class="full"><label class="switch"><input type="checkbox" data-s="pickup.enabled" ${s.pickup.enabled?"checked":""}> Offer local pickup (free)</label></div>
+        ${f("pickupArea","Pickup area shown", s.pickupArea, "text", "full")}
+        <div class="full"><label class="switch"><input type="checkbox" data-s="postage.enabled" ${s.postage.enabled?"checked":""}> Offer postage</label></div>
+        ${f("postage.flat","Flat postage per order ($, blank = TBC)", s.postage.flat, "number")}
+        ${f("postage.freeOver","Free postage over ($, blank = never)", s.postage.freeOver, "number")}
+      </div></div>
+      <div class="card"><h3>✉️ Order emails &amp; account</h3><div class="grid">
+        ${f("web3formsKey","Web3Forms key (optional)", s.web3formsKey, "text", "full")}
+        <div class="full help">Orders always appear on the Orders tab. Add a free key from web3forms.com to also get each order emailed to you.</div>
+        <div class="full help" style="margin-top:6px"><b>Data:</b> ${DB.mode === "demo" ? "Demo mode (this browser only)." : "Connected to Firebase."} ${user && user.email ? "Signed in as " + esc(user.email) + "." : ""}</div>
+        ${DB.mode === "demo" ? `<div class="full"><span id="resetWrap"><button class="btn ghost sm" id="resetAsk">Reset demo data</button></span></div>` : ""}
+      </div></div>
+    </div>
+    <div class="savebar"><button class="btn" id="saveSettings">💾 Save settings</button></div>`;
+}
+$("#tab-settings").addEventListener("change", e => {
+  if(e.target.closest && e.target.closest(".fopt") && e.target.type === "checkbox") e.target.closest(".fopt").classList.toggle("on", e.target.checked);
+});
+$("#tab-settings").addEventListener("click", async e => {
+  const t = e.target;
+  if(t.id === "saveSettings"){
+    const s = clone(CAT.settings);
+    document.querySelectorAll("[data-s]").forEach(el => {
+      const path = el.dataset.s.split("."), last = path.pop();
+      let o = s; path.forEach(p => o = o[p] = o[p] || {});
+      if(el.type === "radio"){ if(el.checked) o[last] = el.value; }
+      else if(el.type === "checkbox") o[last] = el.checked;
+      else if(el.type === "number"){ const n = num(el.value); o[last] = ["promo.buy","promo.free","maxNameLength"].includes(el.dataset.s) ? Math.max(1, Math.round(n || 1)) : n; }
+      else o[last] = el.value.trim();
+    });
+    if(!s.pickup.enabled && !s.postage.enabled) return toast("Turn on pickup or postage (or both)");
+    await safe(() => DB.saveSettings(s), "Settings saved");
+  }
+  if(t.id === "resetAsk") $("#resetWrap").innerHTML = `<span class="confirm">Wipe demo orders and settings? <button class="btn danger sm" id="resetYes">Yes, reset</button></span>`;
+  if(t.id === "resetYes"){ await DB.resetDemo(); await DB.load(); await loadOrders(); toast("Demo reset"); renderSettings(); }
+});
+
+/* =========================================================
+   START
+   ========================================================= */
+let user = null;
+$("#loginForm").addEventListener("submit", async e => {
+  e.preventDefault(); $("#lErr").textContent = "";
+  try{ await DB.login($("#lEmail").value.trim(), $("#lPass").value); }
+  catch(err){ $("#lErr").textContent = "That email or password didn't work."; }
+});
+$("#logout").addEventListener("click", async () => { await DB.logout(); if(DB.mode === "demo") location.href = "index.html"; });
+async function start(){
+  $("#demoBar").hidden = DB.mode !== "demo";
+  if(DB.mode === "demo") $("#logout").textContent = "Exit";
+  await DB.onAuth(async u => {
+    user = u;
+    if(!u){ $("#login").hidden = false; $("#app").hidden = true; return; }
+    $("#login").hidden = true; $("#app").hidden = false;
+    try{
+      await DB.load();
+      if(await DB.seedIfEmpty()) toast("Shop catalogue set up");
+      await loadOrders();
+    }catch(err){ console.error(err); toast("Couldn't load data: " + err.message); }
+    render();
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(() => fitNames()); Promise.all(['700 20px "Dancing Script"','700 20px Poppins','400 20px Chewy','700 20px "Archivo Black"'].map(x => document.fonts.load(x))).then(() => fitNames()).catch(() => {}); }   // name fonts load when first used, so re-centre once they're in
+  });
+}
+start();
+</script>
+</body>
+</html>
