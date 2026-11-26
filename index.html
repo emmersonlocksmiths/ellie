@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ellie Custom Gifts — Personalised Christmas Ornaments</title>
+<meta name="theme-color" content="#efeae6">
+<link rel="icon" href="elephant.png">
+<meta name="description" content="Personalised 3D-printed Christmas ornaments with your name, colours and font. Made to order on the Sunshine Coast, posted Australia-wide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Archivo+Black&family=Poppins:wght@700&family=Chewy&family=Pacifico&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   ELLIE CUSTOM GIFTS — shop styles
+   ========================================================= */
+:root{
+  --bg:#efeae6; --paper:#f8f5f2; --card:#ffffff;
+  --brown:#6f533d; --brown-d:#563f2d; --brown-l:#a88c74; --line:#e2d9d1;
+  --ink:#3b2f26; --muted:#8a7a6d;
+  --red:#b3262e; --green:#2f5d3a; --gold:#c9a24a;
+  --r:18px; --shadow:0 10px 30px -12px rgba(86,63,45,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{font-family:Nunito,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,textarea,select{font:inherit;color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+.hand{font-family:"Patrick Hand","Comic Sans MS","Segoe Print",cursive}
+
+/* header */
+header{position:sticky;top:0;z-index:30;background:rgba(239,234,230,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+.nav .logo img{height:50px;width:auto}
+.nav nav{display:flex;align-items:center;gap:26px}
+.nav nav a{color:var(--brown);text-decoration:none;font-weight:700;font-size:15px}
+.nav nav a:hover{color:var(--brown-d)}
+.cart-btn{position:relative;display:flex;align-items:center;gap:8px;background:var(--brown);color:#fff;padding:10px 16px;border-radius:999px;font-weight:700;font-size:15px;transition:background .2s}
+.cart-btn:hover{background:var(--brown-d)}
+.cart-btn .count{background:#fff;color:var(--brown);border-radius:999px;min-width:22px;height:22px;display:grid;place-items:center;font-size:12px;font-weight:800;padding:0 6px}
+.cart-btn.bump{animation:bump .4s}
+@keyframes bump{50%{transform:scale(1.12)}}
+
+/* hero */
+.hero{padding:70px 0 40px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);color:var(--brown);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.02em}
+.hero h1{font-family:"Patrick Hand","Comic Sans MS","Segoe Print",cursive;font-weight:400;font-size:clamp(42px,6vw,68px);line-height:1.02;color:var(--brown-d);margin:18px 0 16px}
+.hero h1 em{font-style:normal;font-family:Pacifico,cursive;color:var(--red);font-size:.86em}
+.hero p.lead{font-size:18px;color:var(--muted);max-width:30em}
+.cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:999px;font-weight:800;font-size:16px;transition:transform .15s,background .2s,box-shadow .2s;text-decoration:none}
+.btn-primary{background:var(--brown);color:#fff;box-shadow:0 8px 20px -8px rgba(86,63,45,.6)}
+.btn-primary:hover{background:var(--brown-d);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--brown);border:2px solid var(--brown-l)}
+.btn-ghost:hover{border-color:var(--brown)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.hero-art{position:relative;display:grid;place-items:center;min-height:380px}
+.hero-art .orn{position:absolute;filter:drop-shadow(0 14px 18px rgba(86,63,45,.25));transform-origin:50% 0;animation:sway 5s ease-in-out infinite}
+.hero-art .orn:nth-child(1){width:250px;left:8%;top:30px}
+.hero-art .orn:nth-child(2){width:190px;right:4%;top:0;animation-delay:-1.6s}
+.hero-art .orn:nth-child(3){width:170px;right:18%;bottom:0;animation-delay:-3s}
+.hero-art .string{position:absolute;width:2px;background:var(--brown-l);top:-200px;height:200px;left:50%;transform:translateX(-50%)}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.trust{display:flex;gap:22px;margin-top:34px;flex-wrap:wrap;color:var(--brown);font-weight:700;font-size:14px}
+.trust span{display:flex;align-items:center;gap:7px}
+
+/* sections */
+section{padding:60px 0}
+.sec-head{text-align:center;margin-bottom:36px}
+.sec-head h2{font-family:"Patrick Hand","Comic Sans MS","Segoe Print",cursive;font-weight:400;font-size:clamp(34px,4.5vw,48px);color:var(--brown-d);line-height:1.1}
+.sec-head p{color:var(--muted);margin-top:6px}
+
+/* designer */
+.designer{background:var(--card);border-radius:28px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.stage{background:radial-gradient(circle at 50% 40%,#fbf8f5 0%,#efe6dd 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 30px;position:relative;min-height:540px}
+.stage .orn-big{width:min(380px,100%);filter:drop-shadow(0 18px 24px rgba(86,63,45,.28));transform-origin:50% 0;animation:sway 6s ease-in-out infinite}
+.stage .hook{width:2px;height:40px;background:var(--brown-l);margin-bottom:-6px}
+.stage .meta{margin-top:22px;text-align:center;color:var(--muted);font-size:14px}
+.stage .meta b{color:var(--brown)}
+.stage .badge{position:absolute;top:18px;left:18px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:800;color:var(--brown)}
+.controls{padding:34px 34px 30px;display:flex;flex-direction:column;gap:24px}
+.step-label{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--brown-d);margin-bottom:10px;font-size:15px}
+.step-label .n{width:26px;height:26px;border-radius:50%;background:var(--brown);color:#fff;display:grid;place-items:center;font-size:13px}
+.styles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.style-opt{border:2px solid var(--line);border-radius:14px;padding:8px 6px 8px;text-align:center;background:var(--paper);transition:border-color .2s,transform .15s}
+.style-opt:hover{transform:translateY(-2px)}
+.style-opt.on{border-color:var(--brown);background:#fff}
+.style-opt svg{width:100%;height:auto}
+.style-opt span{display:block;font-size:12px;font-weight:700;color:var(--brown);margin-top:2px;line-height:1.2}
+.names{display:flex;flex-direction:column;gap:8px}
+.name-row{display:flex;gap:8px}
+.name-row input{flex:1;border:2px solid var(--line);border-radius:12px;padding:12px 14px;font-size:18px;background:var(--paper);outline:none;transition:border-color .2s}
+.name-row input:focus{border-color:var(--brown);background:#fff}
+.name-row .rm{width:46px;border-radius:12px;background:var(--paper);border:2px solid var(--line);color:var(--muted);font-size:20px}
+.name-row .rm:hover{color:var(--red);border-color:var(--red)}
+.add-name{align-self:flex-start;color:var(--brown);font-weight:800;font-size:14px;padding:4px 2px}
+.add-name:hover{text-decoration:underline}
+.hint{font-size:12.5px;color:var(--muted);margin-top:4px}
+.swatch-group{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.swatch-group h4{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:8px}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.sw{width:34px;height:34px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px var(--line);transition:box-shadow .2s,transform .15s;position:relative}
+.sw:hover{transform:scale(1.08)}
+.sw.on{box-shadow:0 0 0 3px var(--brown)}
+.sw-name{font-size:12.5px;color:var(--brown);font-weight:700;margin-top:6px;min-height:18px}
+.buy-row{display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px dashed var(--line);padding-top:22px;margin-top:auto}
+.price-big{font-size:28px;font-weight:800;color:var(--brown-d);line-height:1}
+.price-big small{display:block;font-size:12px;color:var(--muted);font-weight:600;margin-top:5px}
+
+.promo-chip{background:var(--red);color:#fff;border-color:var(--red)}
+.hero-price{margin-top:22px;font-size:17px;color:var(--brown)}
+.hero-price b{font-size:30px;color:var(--brown-d);font-weight:800}
+.hero-price span{color:var(--red);font-weight:800}
+.nudge{background:#fdf1ec;color:var(--red);border-radius:10px;padding:8px 12px;font-size:13.5px;font-weight:700;margin-bottom:12px;text-align:center}
+.nudge.ok{background:#eef5ef;color:var(--green)}
+.row.promo{color:var(--red);font-weight:700}
+.sub-h{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:8px}
+.scenes .style-opt{padding:6px 4px}
+.scenes .style-opt span{font-size:11px}
+.fonts{grid-template-columns:repeat(3,1fr)}
+.fonts .style-opt{padding:8px 4px 6px}
+.fonts .fs{display:block;height:34px;line-height:34px;color:var(--brown-d);white-space:nowrap;overflow:hidden}
+.style-opt .pp{display:block;font-size:11.5px;color:var(--muted);font-weight:700;margin-top:1px}
+.style-opt svg{max-height:92px}
+.year-row{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+.year-opt{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--brown-d);cursor:pointer}
+.year-opt input{width:18px;height:18px;accent-color:var(--brown)}
+.year-opt span{background:#eef5ef;color:var(--green);font-size:11px;font-weight:800;border-radius:999px;padding:2px 8px;text-transform:uppercase;letter-spacing:.04em}
+#year{width:90px;border:2px solid var(--line);border-radius:12px;padding:8px 12px;font-size:16px;background:var(--paper);outline:none}
+#year:focus{border-color:var(--brown)}
+#year:disabled{opacity:.45}
+.closed{background:var(--card);border-radius:28px;box-shadow:var(--shadow);padding:60px 30px;text-align:center;font-size:18px;color:var(--brown)}
+.closed img{width:110px;margin:0 auto 14px}
+.demo-note{margin-top:14px;font-size:12px}
+.demo-note a{color:var(--brown);font-weight:800}
+.loading{position:fixed;inset:0;background:var(--bg);display:grid;place-items:center;z-index:100;transition:opacity .3s}
+.loading img{width:120px;animation:sway 2s ease-in-out infinite}
+.fit-warn{margin-top:8px;background:#fdecea;color:var(--red);border-radius:10px;padding:8px 12px;font-size:13.5px;font-weight:700}
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.gcard{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.gcard img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;display:block;background:#f1ebe2}
+.gcard .gbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.gcard h3{margin:0;font-size:17px;color:var(--brown-d)}
+.gcard p{margin:0;font-size:14px;color:var(--muted)}
+.gcard .gtry{margin-top:10px;align-self:flex-start;border:2px solid var(--brown);color:var(--brown);background:none;border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit}
+.gcard .gtry:hover{background:var(--brown);color:#fff}
+@media (max-width:800px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.gcard .gbody{padding:10px 12px 12px}.gcard h3{font-size:15px}}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;text-align:center}
+.step .ic{width:62px;height:62px;border-radius:50%;background:#fff;display:grid;place-items:center;margin:0 auto 14px;font-size:28px;border:1px solid var(--line)}
+.step h3{font-family:"Patrick Hand","Comic Sans MS","Segoe Print",cursive;font-weight:400;font-size:26px;color:var(--brown-d)}
+.step p{color:var(--muted);font-size:15px}
+
+/* faq */
+.faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq details{background:var(--card);border-radius:14px;padding:16px 20px;border:1px solid var(--line)}
+.faq summary{font-weight:800;color:var(--brown-d);cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+.faq summary::after{content:"+";font-size:20px;color:var(--brown-l)}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--muted);margin-top:8px;font-size:15px}
+
+/* footer */
+footer{padding:50px 0 40px;border-top:1px solid var(--line);margin-top:30px;text-align:center;color:var(--muted);font-size:14px}
+footer img{height:120px;width:auto;margin:0 auto 16px}
+
+/* cart drawer */
+.scrim{position:fixed;inset:0;background:rgba(59,47,38,.4);opacity:0;pointer-events:none;transition:opacity .25s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--paper);z-index:50;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.12)}
+.drawer.on{transform:none}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line)}
+.drawer-head h3{font-family:"Patrick Hand","Comic Sans MS","Segoe Print",cursive;font-weight:400;font-size:30px;color:var(--brown-d)}
+.x{width:38px;height:38px;border-radius:50%;background:#fff;border:1px solid var(--line);font-size:20px;color:var(--brown)}
+.drawer-body{flex:1;overflow:auto;padding:16px 22px;display:flex;flex-direction:column;gap:12px}
+.ci{display:grid;grid-template-columns:70px 1fr auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px}
+.ci svg{width:70px;height:auto}
+.ci h4{font-family:Pacifico,cursive;font-weight:400;font-size:18px;color:var(--brown-d);line-height:1.3}
+.ci .d{font-size:12.5px;color:var(--muted)}
+.qty{display:flex;align-items:center;gap:6px;margin-top:6px}
+.qty button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:var(--paper);font-weight:800;color:var(--brown)}
+.qty span{min-width:18px;text-align:center;font-weight:800}
+.ci .lp{text-align:right;font-weight:800;color:var(--brown-d)}
+.ci .lp button{display:block;margin-top:8px;font-size:12px;color:var(--muted);font-weight:700;margin-left:auto}
+.ci .lp button:hover{color:var(--red)}
+.empty{text-align:center;color:var(--muted);padding:50px 10px}
+.empty img{width:90px;margin:0 auto 14px;opacity:.6}
+.drawer-foot{padding:18px 22px;border-top:1px solid var(--line);background:#fff}
+.row{display:flex;justify-content:space-between;margin-bottom:6px;font-size:15px}
+.row.total{font-weight:800;font-size:19px;color:var(--brown-d);margin:10px 0 14px}
+.drawer-foot .btn{width:100%}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal.on{opacity:1;pointer-events:auto}
+.modal-card{background:var(--paper);border-radius:24px;width:min(620px,100%);max-height:92vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.25);transform:translateY(16px);transition:transform .3s}
+.modal.on .modal-card{transform:none}
+.modal-head{display:flex;justify-content:space-between;align-items:center;padding:22px 26px 6px}
+.modal-head h3{font-family:"Patrick Hand","Comic Sans MS","Segoe Print",cursive;font-weight:400;font-size:34px;color:var(--brown-d)}
+form.checkout{padding:10px 26px 26px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f{display:flex;flex-direction:column;gap:5px}
+.f.full{grid-column:1/-1}
+.f label{font-size:13px;font-weight:800;color:var(--brown)}
+.f input,.f textarea{border:2px solid var(--line);border-radius:12px;padding:11px 13px;background:#fff;outline:none;font-size:15px}
+.f input:focus,.f textarea:focus{border-color:var(--brown)}
+.f textarea{min-height:76px;resize:vertical}
+.f .err{color:var(--red);font-size:12px;display:none}
+.f.bad input{border-color:var(--red)}
+.f.bad .err{display:block}
+.f select{border:2px solid var(--line);border-radius:12px;padding:11px 13px;background:#fff;outline:none;font-size:15px;font-family:inherit}
+.f select:focus{border-color:var(--brown)}
+.f.bad select{border-color:var(--red)}
+.f label small,.addr-h small{font-weight:600;color:var(--muted)}
+.addr{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--cream,#faf6f0);border:1px solid var(--line);border-radius:14px;padding:14px}
+.addr-h{grid-column:1/-1;font-size:14px;font-weight:800;color:var(--brown)}
+.delivery{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dopt{border:2px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;text-align:left}
+.dopt.on{border-color:var(--brown)}
+.dopt b{display:block;color:var(--brown-d)}
+.dopt small{color:var(--muted)}
+.summary{grid-column:1/-1;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:14px}
+.notice{grid-column:1/-1;font-size:12.5px;color:var(--muted);background:#f3ede7;border-radius:12px;padding:10px 14px}
+.done{padding:10px 30px 34px;text-align:center}
+.done img{width:120px;margin:0 auto 10px}
+.done h3{font-family:"Patrick Hand","Comic Sans MS","Segoe Print",cursive;font-weight:400;font-size:40px;color:var(--brown-d)}
+.done .oid{display:inline-block;background:#fff;border:2px dashed var(--brown-l);border-radius:12px;padding:8px 18px;font-weight:800;color:var(--brown-d);letter-spacing:.06em;margin:12px 0}
+.done p{color:var(--muted)}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,30px);background:var(--brown-d);color:#fff;padding:12px 20px;border-radius:999px;font-weight:700;opacity:0;transition:.3s;z-index:70;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* snow */
+.snow{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.snow i{position:absolute;top:-10px;width:6px;height:6px;border-radius:50%;background:#fff;opacity:.8;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(105vh) translateX(30px)}}
+main,header,footer{position:relative;z-index:2}
+
+@media (max-width:880px){
+  .hero .wrap,.designer{grid-template-columns:1fr}
+  .hero{padding-top:36px}
+  .hero-art{min-height:300px}
+  .hero-art .orn:nth-child(1){width:190px}
+  .hero-art .orn:nth-child(2){width:150px}
+  .hero-art .orn:nth-child(3){width:130px}
+  .stage{min-height:420px}
+  .steps{grid-template-columns:1fr}
+  .nav nav a{display:none}
+  .nav .logo img{height:42px}
+}
+@media (max-width:520px){
+  .styles{grid-template-columns:repeat(2,1fr)}
+  .swatch-group{grid-template-columns:1fr}
+  form.checkout{grid-template-columns:1fr}
+  .delivery{grid-template-columns:1fr}
+  .controls{padding:24px 20px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="loading" id="loading"><img src="elephant.png" alt="Loading"></div>
+<div class="snow" id="snow"></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Ellie Custom Gifts home"><img src="logo_h.png" alt="Ellie Custom Gifts"></a>
+    <nav>
+      <a href="#design">Design yours</a>
+      <a href="#gallery">Real prints</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+        Cart <span class="count" id="cartCount">0</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow" id="announce"></span> <span class="eyebrow promo-chip" id="promoChip"></span>
+        <h1>Christmas ornaments made with <em>their name</em> on them</h1>
+        <p class="lead" id="tagline"></p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#design">Design your ornament</a>
+          <a class="btn btn-ghost" href="#how">How it works</a>
+        </div>
+        <div class="hero-price" id="heroPrice"></div>
+        <div class="trust">
+          <span>✏️ Any name</span><span>🎨 Pick your colours</span><span>📍 Local pickup or post</span>
+        </div>
+      </div>
+      <div class="hero-art" id="heroArt"></div>
+    </div>
+  </section>
+
+  <!-- DESIGNER -->
+  <section id="design">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Design your ornament</h2>
+        <p>The preview updates as you type. Add more names to make a whole family set.</p>
+      </div>
+      <div class="closed" id="closedBox" hidden></div>
+      <div class="designer" id="designer">
+        <div class="stage">
+          <span class="badge" id="sizeBadge">80 mm · 2-colour print</span>
+          <div class="hook"></div>
+          <div class="orn-big" id="preview"></div>
+          <div class="meta" id="previewMeta"></div>
+        </div>
+        <div class="controls">
+          <div>
+            <div class="step-label"><span class="n">1</span>Choose an ornament</div>
+            <div class="styles products" id="products"></div>
+            <div id="sceneWrap" style="margin-top:14px">
+              <h4 class="sub-h">Scene</h4>
+              <div class="styles scenes" id="styles"></div>
+            </div>
+          </div>
+          <div>
+            <div class="step-label"><span class="n">2</span><span id="namesLabel">Enter the name(s)</span></div>
+            <div class="names" id="names"></div>
+            <button class="add-name" id="addName">+ Add another name</button>
+            <div id="fontWrap" style="margin-top:14px">
+              <h4 class="sub-h">Font</h4>
+              <div class="styles fonts" id="fonts"></div>
+            </div>
+            <div class="year-row" id="yearRow"><label class="year-opt"><input type="checkbox" id="addYear"> Add the year <span>free</span></label><input type="text" id="year" maxlength="4" inputmode="numeric" aria-label="Year"></div>
+            <div class="hint" id="namesHint"></div>
+            <div class="fit-warn" id="fitWarn" hidden></div>
+          </div>
+          <div>
+            <div class="step-label"><span class="n">3</span>Pick your colours</div>
+            <div class="swatch-group">
+              <div><h4>Ornament</h4><div class="swatches" id="baseSw"></div><div class="sw-name" id="baseName"></div></div>
+              <div><h4>Name</h4><div class="swatches" id="textSw"></div><div class="sw-name" id="textName"></div></div>
+            </div>
+          </div>
+          <div class="buy-row">
+            <div class="price-big" id="designPrice"></div>
+            <button class="btn btn-primary" id="addToCart">Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REAL PRINTS -->
+  <section id="gallery">
+    <div class="wrap">
+      <div class="sec-head"><h2>Real prints</h2><p>Photos of actual ornaments, straight off our printer. Tap one to try the same colours.</p></div>
+      <div class="gallery" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head"><h2>How it works</h2><p>Three simple steps from your screen to the tree.</p></div>
+      <div class="steps">
+        <div class="step"><div class="ic">✏️</div><h3>1. Design it</h3><p>Pick a design, type the name and choose your colours. What you see in the preview is what gets printed.</p></div>
+        <div class="step"><div class="ic">🖨️</div><h3>2. We print it</h3><p>Every ornament is 3D-printed to order and checked by hand before it's packed.</p></div>
+        <div class="step"><div class="ic">🎁</div><h3>3. Pick up or post</h3><p>Collect locally on the Sunshine Coast, or have it posted to you. We'll confirm your order and payment details by email.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head"><h2>Questions</h2></div>
+      <div class="faq">
+        <details><summary>How big are the ornaments?</summary><p>The bauble is about 80 mm across, the disc 76 mm, the star 86 mm wide and the Christmas tree is about 86 mm wide and 99 mm tall, all around 4 mm thick. The family tree grows with the number of names, roughly 60–120 mm tall. They're all light enough for any tree branch.</p></details>
+        <details><summary>How do I pay?</summary><p>Once you place an order we'll email you to confirm the details and send an invoice. Nothing is charged online.</p></details>
+        <details id="promoFaq"><summary>How does the free ornament deal work?</summary><p id="promoFaqText"></p></details>
+        <details><summary>Can I add the year?</summary><p>Yes, on every design and at no extra cost. Tick "Add the year" in the designer, or leave it off for an ornament that suits any Christmas.</p></details>
+        <details><summary>Can I order a set for the whole family?</summary><p>Yes. Click "Add another name" in the designer and each name becomes its own ornament in the same design and colours.</p></details>
+        <details><summary>What are they made from?</summary><p>They're printed in PLA, a durable plant-based plastic. Keep them away from heat, like a hot car dashboard.</p></details>
+        <details id="cutoffFaq"><summary>When do I need to order for Christmas?</summary><p id="cutoffText"></p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="logo_v.png" alt="Ellie Custom Gifts">
+    <p id="footContact"></p>
+    <p style="margin-top:6px">© <span id="yr"></span> <span class="shopName">Ellie Custom Gifts</span> · Made on the Sunshine Coast, QLD</p>
+    <p id="demoNote" class="demo-note" hidden>Demo mode · <a href="admin.html">Open the admin page</a></p>
+  </div>
+</footer>
+
+<!-- CART -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Cart">
+  <div class="drawer-head"><h3>Your cart</h3><button class="x" data-close aria-label="Close">×</button></div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="cartFoot"></div>
+</aside>
+
+<!-- CHECKOUT -->
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-card" id="modalCard"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="shared.js"></script>
+<script>
+/* =========================================================
+   SHOP PAGE - customers only. All settings live in the admin page.
+   ========================================================= */
+const $ = s => document.querySelector(s);
+const S = () => CAT.settings;
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const activeProducts = () => CAT.products.filter(p => p.active);
+const activeScenes = () => CAT.scenes.filter(s => s.active);
+const baseColours = () => CAT.colours.filter(c => c.inStock && c.forBase);
+const textColours = () => CAT.colours.filter(c => c.inStock && c.forText);
+const unitPrice = productId => { const p = CAT.products.find(x => x.id === productId); return p ? (p.price === "" ? null : p.price) : null; };
+
+/* ---------- state ---------- */
+const design = { productId:null, style:null, font:null, base:null, text:null, names:[""], year:String(new Date().getFullYear()), addYear:false };
+let cart = [];
+let focusIdx = 0;
+const P = () => prod(design.productId);
+const isFamily = () => P().type === "family";
+// the font in use: the customer's pick if it's still offered, otherwise this ornament's usual font
+const curFont = () => { const on = fontsOn(); return on.includes(design.font) ? design.font : on.includes(defaultFont(P().type)) ? defaultFont(P().type) : (on[0] || "script"); };
+const maxNames = () => Number(P().maxNames) || (isFamily() ? 6 : 12);
+const maxLen = () => isFamily() ? Math.min(10, S().maxNameLength) : S().maxNameLength;
+const yearVal = () => P().yearOption && design.addYear && /^\d{4}$/.test(design.year.trim()) ? design.year.trim() : "";
+
+function ensureValid(){
+  const ap = activeProducts();
+  if(!ap.find(p => p.id === design.productId)) design.productId = ap[0] && ap[0].id;
+  const sc = activeScenes(); if(!sc.find(s => s.id === design.style)) design.style = sc[0] && sc[0].id;
+  const b = baseColours(), t = textColours();
+  if(!b.find(c => c.id === design.base)) design.base = (b.find(c => c.id === "green") || b[0] || {}).id;
+  if(!t.find(c => c.id === design.text)) design.text = (t.find(c => c.id !== design.base && c.id === "white") || t.find(c => c.id !== design.base) || t[0] || {}).id;
+}
+
+/* ---------- designer ---------- */
+function sampleFor(p){
+  const y = yearVal();
+  return p.type === "family" ? {type:"family", productId:p.id, names:["ANNA","JAMES","LILY"], year:y, base:design.base, text:design.text}
+    : {type:p.type, productId:p.id, style:design.style, base:design.base, text:design.text, name:"Name", year: p.yearOption ? y : ""};
+}
+function renderProducts(){
+  $("#products").innerHTML = activeProducts().map(p => `
+    <button class="style-opt ${p.id===design.productId?"on":""}" data-product="${esc(p.id)}" aria-pressed="${p.id===design.productId}" title="${esc(p.description||"")}">
+      ${itemSVG(sampleFor(p))}
+      <span>${esc(p.name)}</span><span class="pp">${p.price==null||p.price==="" ? "Price TBC" : money(p.price)}</span></button>`).join("");
+  $("#sceneWrap").style.display = P().type === "bauble" && activeScenes().length > 1 ? "" : "none";
+  $("#styles").innerHTML = activeScenes().map(s => `
+    <button class="style-opt ${s.id===design.style?"on":""}" data-style="${esc(s.id)}" aria-pressed="${s.id===design.style}">
+      ${ornamentSVG({style:s.id, base:design.base, text:design.text, name:"Name", year:yearVal()})}
+      <span>${esc(s.name)}</span></button>`).join("");
+  renderFonts();
+}
+function renderFonts(){
+  const on = fontsOn(), fk = curFont();
+  $("#fontWrap").style.display = !isFamily() && P().type !== "photo" && on.length > 1 ? "" : "none";
+  $("#fonts").innerHTML = on.map(k => { const nf = NAME_FONTS[k];
+    return `<button class="style-opt ${k===fk?"on":""}" data-font="${k}" aria-pressed="${k===fk}">
+      <span class="fs" style="font-family:${nf.css};font-weight:${nf.weight};font-size:${nf.caps ? 19 : 27}px">${nf.caps ? "NAME" : "Name"}</span>
+      <span>${nf.label}</span></button>`; }).join("");
+}
+function renderSwatches(){
+  const sw = (key, list) => list.map(c => `<button class="sw ${design[key]===c.id?"on":""}" style="background:${c.hex}" data-${key}="${esc(c.id)}" title="${esc(c.name)}" aria-label="${esc(c.name)}"></button>`).join("");
+  $("#baseSw").innerHTML = sw("base", baseColours()); $("#textSw").innerHTML = sw("text", textColours());
+  $("#baseName").textContent = col(design.base).name; $("#textName").textContent = col(design.text).name;
+  const bb = P().type === "bauble", tr = P().type === "tree";
+  $("#baseSw").parentElement.querySelector("h4").textContent = bb ? "Background" : tr ? "Tree" : "Ornament";
+  $("#textSw").parentElement.querySelector("h4").textContent = bb ? "Frame & name" : tr ? "Outline & name" : "Name";
+}
+function renderNames(){
+  const fam = isFamily();
+  $("#namesLabel").textContent = fam ? "Enter your family's names" : "Enter the name(s)";
+  $("#namesHint").textContent = fam
+    ? `Up to ${maxNames()} names (${maxLen()} letters each), all printed together on one ornament, top to bottom.`
+    : `Up to ${maxLen()} characters per name. Each name is printed as its own ornament.`;
+  $("#yearRow").style.display = P().yearOption ? "" : "none";
+  $("#addYear").checked = design.addYear;
+  $("#year").value = design.year; $("#year").disabled = !design.addYear;
+  $("#addName").textContent = fam ? "+ Add a family member" : "+ Add another name";
+  $("#names").innerHTML = design.names.map((n,i) => `
+    <div class="name-row">
+      <input type="text" maxlength="${maxLen()}" placeholder="${i ? (fam ? "Next name" : "Another name") : (fam ? "e.g. Anna" : "e.g. Charlotte")}" value="${esc(n)}" data-i="${i}" aria-label="Name ${i+1}">
+      ${design.names.length > 1 ? `<button class="rm" data-rm="${i}" aria-label="Remove name">×</button>` : ""}
+    </div>`).join("");
+}
+function currentItem(){
+  const p = P();
+  if(p.type === "family"){
+    const names = design.names.map(n => n.trim()).filter(Boolean);
+    return {type:"family", productId:p.id, names: names.length ? names : null, year: yearVal(), base:design.base, text:design.text};
+  }
+  return {type:p.type, productId:p.id, style:design.style, font:curFont(), base:design.base, text:design.text, year: yearVal(), name: design.names[focusIdx] ?? design.names[0]};
+}
+function renderPreview(){
+  const p = P(), fam = isFamily();
+  $("#preview").innerHTML = itemSVG(currentItem());
+  const count = design.names.filter(n => n.trim()).length;
+  const orns = fam ? 1 : Math.max(count, 1);
+  $("#previewMeta").innerHTML = `<b>${esc(p.name)}</b>${p.type==="bauble" ? " · " + esc(sty(design.style).name) : ""}${!fam && p.type !== "photo" ? " · " + NAME_FONTS[curFont()].label + " font" : ""} · ${esc(col(design.base).name)} with ${esc(col(design.text).name)} ${fam ? "lettering" : p.type === "bauble" ? "frame & name" : p.type === "tree" ? "outline & name" : "name"}` +
+    (!fam && design.names.length > 1 ? `<br>Showing ${focusIdx+1} of ${design.names.length} names` : "");
+  $("#sizeBadge").textContent = p.description || (fam ? "Family names · one ornament" : "Made to order");
+  const price = unitPrice(p.id), t = priceFor(Array(orns).fill(price));
+  $("#designPrice").innerHTML = price == null
+    ? `Price TBC<small>We'll confirm the price by email</small>`
+    : `${money(t.sub)}<small>${orns > 1 ? `${orns} ornaments × ${money(price)}` : `each`}${t.free ? ` · <b style="color:var(--red)">${t.free} free!</b>` : ""}</small>`;
+  $("#addToCart").textContent = !fam && count > 1 ? `Add ${count} to cart` : "Add to cart";
+  const tooLong = design.names.map(n => n.trim()).filter(n => n && !nameFits(p.type, n, yearVal(), design.style, curFont()));
+  $("#fitWarn").hidden = !tooLong.length;
+  $("#fitWarn").textContent = tooLong.length ? `"${tooLong[0]}" is too long to fit on the ${p.name.toLowerCase()}. Try a shorter version${yearVal() ? " or leave the year off" : ""}.` : "";
+  fitNames($("#preview"));
+}
+/* ---------- Real prints gallery ---------- */
+function renderGallery(){
+  const items = GALLERY.filter(g => { const p = prod(g.product); return p && p.active !== false; });
+  $("#gallery").hidden = !items.length;
+  $("#galleryGrid").innerHTML = items.map((g, i) => `
+    <figure class="gcard">
+      <img src="${g.file}" alt="${esc(g.title)}: ${esc(g.detail)}" loading="lazy" width="900" height="900">
+      <figcaption class="gbody"><h3>${esc(g.title)}</h3><p>${esc(g.detail)}</p>
+        <button type="button" class="gtry" data-gallery="${GALLERY.indexOf(g)}">Try these colours</button></figcaption>
+    </figure>`).join("");
+}
+$("#galleryGrid").addEventListener("click", e => {
+  const b = e.target.closest("[data-gallery]"); if(!b) return;
+  const g = GALLERY[+b.dataset.gallery], p = prod(g.product); if(!p) return;
+  design.productId = p.id;
+  if(g.style) design.style = g.style;
+  if(g.font) design.font = g.font;
+  const okCol = (id, k) => { const c = CAT.colours.find(c => c.id === id); return c && c.inStock !== false && c[k] !== false; };
+  if(okCol(g.base, "forBase")) design.base = g.base;
+  if(okCol(g.text, "forText")) design.text = g.text;
+  design.names = g.names ? g.names.slice(0, maxNames()) : [g.name || ""];
+  focusIdx = 0; renderNames(); renderAll();
+  document.getElementById("design").scrollIntoView({ behavior: "smooth" });
+  toast("Colours loaded. Now make it yours!");
+});
+function renderAll(){ ensureValid(); renderProducts(); renderSwatches(); renderPreview(); fitNames(); }
+
+$("#products").addEventListener("click", e => {
+  const b = e.target.closest("[data-product]"); if(!b) return;
+  const next = prod(b.dataset.product);
+  if(next.type === "family" && !isFamily()) design.addYear = true;
+  design.productId = next.id;
+  if(design.names.length > maxNames()) design.names = design.names.slice(0, maxNames());
+  design.names = design.names.map(n => n.slice(0, maxLen()));
+  focusIdx = 0; renderNames(); renderAll();
+});
+$("#fonts").addEventListener("click", e => { const b = e.target.closest("[data-font]"); if(!b) return; design.font = b.dataset.font; renderFonts(); renderPreview(); fitNames($("#designer")); });
+$("#styles").addEventListener("click", e => { const b = e.target.closest("[data-style]"); if(!b) return; design.style = b.dataset.style; renderProducts(); renderPreview(); fitNames($("#designer")); });
+$("#year").addEventListener("input", e => { e.target.value = e.target.value.replace(/\D/g,""); design.year = e.target.value; renderPreview(); });
+$("#addYear").addEventListener("change", e => { design.addYear = e.target.checked; $("#year").disabled = !design.addYear; renderPreview(); renderProducts(); fitNames($("#designer")); });
+document.querySelector(".swatch-group").addEventListener("click", e => {
+  const b = e.target.closest(".sw"); if(!b) return;
+  if(b.dataset.base) design.base = b.dataset.base;
+  if(b.dataset.text) design.text = b.dataset.text;
+  if(design.base === design.text && !isFamily()) toast("Tip: pick two different colours so the name stands out");
+  renderAll();
+});
+$("#names").addEventListener("input", e => {
+  if(e.target.dataset.i == null) return;
+  const v = e.target.value.replace(/[^\p{L}\p{N} '\-&.]/gu, "");
+  if(v !== e.target.value) e.target.value = v;
+  design.names[+e.target.dataset.i] = v; focusIdx = +e.target.dataset.i; renderPreview();
+});
+$("#names").addEventListener("focusin", e => { if(e.target.dataset.i != null){ focusIdx = +e.target.dataset.i; renderPreview(); }});
+$("#names").addEventListener("click", e => {
+  const b = e.target.closest("[data-rm]"); if(!b) return;
+  design.names.splice(+b.dataset.rm, 1); focusIdx = 0; renderNames(); renderPreview();
+});
+$("#addName").addEventListener("click", () => {
+  if(design.names.length >= maxNames()) return toast(isFamily() ? `Up to ${maxNames()} names fit on one ornament` : "That's a big family! Add these, then start another set.");
+  design.names.push(""); renderNames(); focusIdx = design.names.length-1;
+  $(`#names input[data-i="${focusIdx}"]`).focus(); renderPreview();
+});
+$("#addToCart").addEventListener("click", () => {
+  const names = design.names.map(n => n.trim()).filter(Boolean);
+  if(!names.length){ toast("Type a name first"); $("#names input").focus(); return; }
+  const p = P();
+  if(names.some(n => !nameFits(p.type, n, yearVal(), design.style, curFont()))){ toast("One of the names is too long to fit. Please shorten it."); return; }
+  const snap = {productId:p.id, type:p.type, productName:p.name, base:design.base, baseName:col(design.base).name, text:design.text, textName:col(design.text).name, year:yearVal()};
+  if(p.type === "bauble"){ snap.style = design.style; snap.styleName = sty(design.style).name; }
+  if(p.type !== "family" && p.type !== "photo"){ snap.font = curFont(); snap.fontName = NAME_FONTS[snap.font].label; }
+  const add = it => {
+    const key = JSON.stringify([it.productId, it.style, it.font, it.base, it.text, it.name, it.names, it.year]);
+    const same = cart.find(i => JSON.stringify([i.productId, i.style, i.font, i.base, i.text, i.name, i.names, i.year]) === key);
+    if(same) same.qty++; else cart.push({id: Date.now()+"-"+Math.random().toString(36).slice(2,6), ...it, qty:1});
+  };
+  let n = 0;
+  if(p.type === "family"){ add({...snap, names}); n = 1; }
+  else names.forEach(name => { add({...snap, name}); n++; });
+  saveCart(); toast(`${n} ornament${n>1?"s":""} added 🎄`);
+  $("#cartBtn").classList.remove("bump"); void $("#cartBtn").offsetWidth; $("#cartBtn").classList.add("bump");
+  design.names = [""]; focusIdx = 0; renderNames(); renderPreview();
+});
+
+/* ---------- cart ---------- */
+function totals(){ return priceFor(cart.flatMap(i => Array(i.qty).fill(unitPrice(i.productId)))); }
+function promoNudge(t){
+  const pr = S().promo; if(!pr.enabled || !t.qty) return "";
+  if(t.toNext === pr.free && pr.free === 1) return `<div class="nudge">🎁 Add 1 more ornament and it's <b>free</b>!</div>`;
+  if(t.free) return `<div class="nudge ok">🎉 You've got ${t.free} free ornament${t.free>1?"s":""}!</div>`;
+  return `<div class="nudge">${esc(pr.label)}: add ${t.toNext - pr.free} more to qualify</div>`;
+}
+function deliveryCost(method, sub){
+  if(method !== "post") return 0;
+  const p = S().postage;
+  if(p.freeOver != null && p.freeOver !== "" && sub != null && sub > p.freeOver) return 0;   // free on orders OVER the amount
+  return p.flat === "" ? null : p.flat;
+}
+function postageNote(){
+  const p = S().postage; if(!p.enabled) return "chosen at checkout";
+  const flat = p.flat == null || p.flat === "" ? "postage TBC" : money(p.flat) + " postage";
+  return p.freeOver ? `${flat}, free over ${money(p.freeOver)}` : flat;
+}
+function saveCart(){ store.set("ellie_cart_v2", cart); renderCart(); }
+function renderCart(){
+  const t = totals(), { qty, sub } = t;
+  $("#cartCount").textContent = qty;
+  if(!cart.length){
+    $("#cartBody").innerHTML = `<div class="empty"><img src="elephant.png" alt=""><p>Your cart is empty.<br>Let's make something special!</p></div>`;
+    $("#cartFoot").innerHTML = S().shopOpen ? `<button class="btn btn-primary" data-close data-go="design">Design an ornament</button>` : "";
+    return;
+  }
+  $("#cartBody").innerHTML = cart.map(i => `
+    <div class="ci">
+      ${itemSVG(i)}
+      <div><h4 ${i.type==="family" ? `style="font-family:'Archivo Black',sans-serif;font-size:13px;text-transform:uppercase"` : ""}>${esc(itemTitle(i))}</h4><div class="d">${esc(itemDesc(i))}<br>${esc(itemColours(i))}</div>
+        <div class="qty"><button data-dec="${i.id}" aria-label="Less">−</button><span>${i.qty}</span><button data-inc="${i.id}" aria-label="More">+</button></div></div>
+      <div class="lp">${unitPrice(i.productId)==null ? "TBC" : money(i.qty*unitPrice(i.productId))}<button data-del="${i.id}">Remove</button></div>
+    </div>`).join("");
+  $("#cartFoot").innerHTML = `
+    ${promoNudge(t)}
+    <div class="row"><span>${qty} ornament${qty>1?"s":""}</span><span>${money(t.full)}</span></div>
+    ${t.free ? `<div class="row promo"><span>${esc(S().promo.label)} (${t.free} free)</span><span>${t.discount==null ? "applied" : "−"+money(t.discount)}</span></div>` : ""}
+    <div class="row" style="color:var(--muted);font-size:13px"><span>Pickup or postage</span><span>${postageNote()}</span></div>
+    <div class="row total"><span>Subtotal</span><span>${sub==null ? "Price TBC" : money(sub)}</span></div>
+    <button class="btn btn-primary" id="toCheckout" ${S().shopOpen ? "" : "disabled"}>${S().shopOpen ? "Checkout" : "Orders are closed"}</button>`;
+  fitNames($("#cartBody"));
+}
+$("#cartBody").addEventListener("click", e => {
+  const t = e.target, f = id => cart.find(i => String(i.id) === id);
+  if(t.dataset.inc){ f(t.dataset.inc).qty++; saveCart(); }
+  if(t.dataset.dec){ const it = f(t.dataset.dec); it.qty--; if(it.qty < 1) cart = cart.filter(i => i !== it); saveCart(); }
+  if(t.dataset.del){ cart = cart.filter(i => String(i.id) !== t.dataset.del); saveCart(); }
+});
+const openCart = () => { $("#drawer").classList.add("on"); $("#scrim").classList.add("on"); };
+const closeAll = () => { ["#drawer","#scrim","#modal"].forEach(s => $(s).classList.remove("on")); };
+$("#cartBtn").addEventListener("click", openCart);
+$("#scrim").addEventListener("click", closeAll);
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeAll(); });
+document.addEventListener("click", e => {
+  const c = e.target.closest("[data-close]");
+  if(c){ closeAll(); if(c.dataset.go) document.getElementById(c.dataset.go).scrollIntoView(); }
+  if(e.target.id === "toCheckout") openCheckout();
+  if(e.target.id === "modal") closeAll();
+});
+
+/* ---------- checkout ---------- */
+let delivery = "pickup";
+function deliveryOptions(){ return [S().pickup.enabled && "pickup", S().postage.enabled && "post"].filter(Boolean); }
+function checkoutSummary(){
+  const t = totals(), { qty, sub } = t, d = deliveryCost(delivery, sub);
+  const total = sub == null || d == null ? null : sub + d;
+  return `<div class="row"><span>${qty} ornament${qty>1?"s":""}</span><span>${money(t.full)}</span></div>
+    ${t.free ? `<div class="row promo"><span>${esc(S().promo.label)} (${t.free} free)</span><span>${t.discount==null ? "applied" : "−"+money(t.discount)}</span></div>` : ""}
+    <div class="row"><span>${delivery === "post" ? "Postage" : "Local pickup"}</span><span>${delivery === "post" ? (d===0 ? "Free" : money(d)) : "Free"}</span></div>
+    <div class="row total" style="margin:6px 0 0"><span>Total</span><span>${total == null ? "We'll confirm by email" : money(total)}</span></div>`;
+}
+function openCheckout(){
+  $("#drawer").classList.remove("on");
+  const opts = deliveryOptions(); if(!opts.includes(delivery)) delivery = opts[0] || "pickup";
+  const pf = S().postage.flat, fo = S().postage.freeOver;
+  $("#modalCard").innerHTML = `
+    <div class="modal-head"><h3>Checkout</h3><button class="x" data-close aria-label="Close">×</button></div>
+    <form class="checkout" id="coForm" novalidate>
+      <div class="f"><label for="cName">Your name</label><input id="cName" autocomplete="name" required><span class="err">Please enter your name</span></div>
+      <div class="f"><label for="cPhone">Mobile</label><input id="cPhone" type="tel" autocomplete="tel" required><span class="err">Please enter a mobile number</span></div>
+      <div class="f full"><label for="cEmail">Email</label><input id="cEmail" type="email" autocomplete="email" required><span class="err">Please enter a valid email</span></div>
+      <div class="f full"><label>Delivery</label>
+        <div class="delivery">
+          ${opts.includes("pickup") ? `<button type="button" class="dopt ${delivery==="pickup"?"on":""}" data-del-opt="pickup"><b>Local pickup</b><small>${esc(S().pickupArea)} · free</small></button>` : ""}
+          ${opts.includes("post") ? `<button type="button" class="dopt ${delivery==="post"?"on":""}" data-del-opt="post"><b>Post it to me</b><small>Australia-wide · ${pf==null||pf==="" ? "price TBC" : money(pf)}${fo ? ` (free over ${money(fo)})` : ""}</small></button>` : ""}
+        </div></div>
+      <div class="f full addr" id="addrWrap" style="display:${delivery==="post"?"grid":"none"}">
+        <div class="addr-h">Postal address <small>(Australia only)</small></div>
+        <div class="f full"><label for="aLine1">Street address</label><input id="aLine1" autocomplete="address-line1" placeholder="e.g. 12 Smith Street" required><span class="err">Please enter your street address</span></div>
+        <div class="f full"><label for="aLine2">Unit, apartment or PO Box <small>(optional)</small></label><input id="aLine2" autocomplete="address-line2" placeholder="e.g. Unit 3"></div>
+        <div class="f full"><label for="aSuburb">Suburb or town</label><input id="aSuburb" autocomplete="address-level2" required><span class="err">Please enter your suburb or town</span></div>
+        <div class="f"><label for="aState">State or territory</label><select id="aState" autocomplete="address-level1" required>
+          <option value="">Choose…</option>${["ACT","NSW","NT","QLD","SA","TAS","VIC","WA"].map(s => `<option>${s}</option>`).join("")}</select><span class="err">Please choose a state</span></div>
+        <div class="f"><label for="aPost">Postcode</label><input id="aPost" inputmode="numeric" autocomplete="postal-code" maxlength="4" pattern="[0-9]{4}" required><span class="err" id="aPostErr">Please enter a 4-digit postcode</span></div>
+      </div>
+      <div class="f full"><label for="cNotes">Notes (optional)</label><textarea id="cNotes" placeholder="Anything we should know: spelling checks, gift for a teacher, etc."></textarea></div>
+      <div class="summary" id="coSummary">${checkoutSummary()}</div>
+      <div class="notice">No payment is taken online. We'll email you to confirm your order${totals().sub==null?" and price":""} and send an invoice.${DB.mode==="demo" ? "<br><b>Demo mode:</b> orders are saved in this browser only, so you can see them in the admin page." : ""}</div>
+      <div class="f full"><button class="btn btn-primary" type="submit" id="placeBtn">Place order</button></div>
+    </form>`;
+  $("#modal").classList.add("on"); $("#scrim").classList.add("on");
+  setTimeout(() => $("#cName").focus(), 200);
+}
+$("#modalCard").addEventListener("click", e => {
+  const b = e.target.closest("[data-del-opt]"); if(!b) return;
+  delivery = b.dataset.delOpt;
+  document.querySelectorAll(".dopt").forEach(x => x.classList.toggle("on", x === b));
+  $("#addrWrap").style.display = delivery === "post" ? "grid" : "none";
+  $("#coSummary").innerHTML = checkoutSummary();
+});
+// Australia Post postcode ranges for each state / territory
+const POSTCODES = { NSW: [[1000,2599],[2619,2899],[2921,2999]], ACT: [[200,299],[2600,2618],[2900,2920]], VIC: [[3000,3999],[8000,8999]],
+  QLD: [[4000,4999],[9000,9999]], SA: [[5000,5999]], WA: [[6000,6797],[6800,6999]], TAS: [[7000,7999]], NT: [[800,999]] };
+const postcodeMatchesState = (pc, st) => (POSTCODES[st] || []).some(([a, b]) => +pc >= a && +pc <= b);
+// the address in its parts, plus one block laid out the way Australia Post likes it (last line in capitals)
+function postalAddress(){
+  if(delivery !== "post") return { address: "" };
+  const g = id => $(id).value.trim(), tidy = s => s.replace(/\s+/g, " ");
+  const parts = { line1: tidy(g("#aLine1")), line2: tidy(g("#aLine2")), suburb: tidy(g("#aSuburb")), state: $("#aState").value, postcode: g("#aPost") };
+  const address = [parts.line2, parts.line1, `${parts.suburb.toUpperCase()} ${parts.state} ${parts.postcode}`].filter(Boolean).join("\n");
+  return { address, addressParts: parts };
+}
+$("#modalCard").addEventListener("submit", async e => {
+  e.preventDefault();
+  const v = id => $(id).value.trim();
+  const checks = [["#cName", v("#cName")], ["#cPhone", v("#cPhone").replace(/\D/g,"").length >= 8], ["#cEmail", /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v("#cEmail"))]];
+  if(delivery === "post"){
+    const st = $("#aState").value, pc = v("#aPost");
+    checks.push(["#aLine1", v("#aLine1").length >= 4], ["#aSuburb", v("#aSuburb").length >= 2], ["#aState", !!st]);
+    const pcOk = /^\d{4}$/.test(pc), match = !pcOk || !st || postcodeMatchesState(pc, st);
+    $("#aPostErr").textContent = !pcOk ? "Please enter a 4-digit postcode" : `That postcode isn't in ${st}. Please check the postcode or state.`;
+    checks.push(["#aPost", pcOk && match]);
+  }
+  let ok = true;
+  checks.forEach(([id, good]) => { $(id).closest(".f").classList.toggle("bad", !good); if(!good) ok = false; });
+  if(!ok) return;
+
+  const t = totals(), d = deliveryCost(delivery, t.sub);
+  const order = {
+    id: "ELL-" + Date.now().toString(36).slice(-5).toUpperCase(),
+    createdAt: new Date().toISOString(),
+    status: "New", paid: false, adminNotes: "",
+    customer: { name: v("#cName"), email: v("#cEmail"), phone: v("#cPhone") },
+    delivery: delivery === "post" ? "Post" : "Local pickup", ...postalAddress(),
+    notes: v("#cNotes"),
+    items: cart.map(i => ({ ...i, unitPrice: unitPrice(i.productId) })),
+    totals: { ornaments: t.qty, free: t.free, full: t.full, discount: t.discount, subtotal: t.sub,
+              postage: delivery === "post" ? d : 0, total: t.sub == null || d == null ? null : t.sub + d }
+  };
+  const btn = $("#placeBtn"); btn.disabled = true; btn.textContent = "Sending…";
+  try{ await DB.createOrder(order); }
+  catch(err){ btn.disabled = false; btn.textContent = "Place order"; toast("Sorry, that didn't go through. Please try again."); return; }
+  notifyByEmail(order);
+  cart = []; saveCart();
+  $("#modalCard").innerHTML = `
+    <div class="modal-head" style="justify-content:flex-end"><button class="x" data-close aria-label="Close">×</button></div>
+    <div class="done">
+      <img src="elephant.png" alt="">
+      <h3>Thank you, ${esc(order.customer.name.split(" ")[0])}!</h3>
+      <div class="oid">${order.id}</div>
+      <p>We've got your order for ${t.qty} ornament${t.qty>1?"s":""}. We'll be in touch at <b>${esc(order.customer.email)}</b> soon to confirm the details and send an invoice.</p>
+      <button class="btn btn-primary" style="margin-top:22px" data-close>Back to the shop</button>
+    </div>`;
+});
+// optional: email a copy of each order to the shop (Web3Forms key in admin > Settings)
+function notifyByEmail(o){
+  if(!S().web3formsKey) return;
+  const lines = o.items.map(i => `${i.qty} × ${itemDesc(i)} | "${itemTitle(i)}" | ${itemColours(i)}`).join("\n");
+  fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ access_key: S().web3formsKey, subject: `New order ${o.id} (${o.totals.ornaments} ornaments)`, from_name: S().shopName,
+      order: o.id, customer: o.customer.name, email: o.customer.email, phone: o.customer.phone, delivery: o.delivery, address: o.address || "-",
+      items: lines, total: money(o.totals.total), notes: o.notes || "-" }) }).catch(() => {});
+}
+
+/* ---------- page text from settings ---------- */
+let tt;
+function toast(msg){ const t = $("#toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 2400); }
+function applySettings(){
+  const s = S();
+  document.querySelectorAll(".shopName").forEach(e => e.textContent = s.shopName);
+  $("#announce").textContent = s.announcement; $("#announce").hidden = !s.announcement;
+  $("#tagline").textContent = s.tagline;
+  const pr = s.promo;
+  if(pr.enabled){ $("#promoChip").textContent = "🎁 " + pr.label; $("#promoChip").hidden = false;
+    $("#promoFaqText").textContent = `For every ${pr.buy + pr.free} ornaments in your order, ${pr.free === 1 ? "one is" : pr.free + " are"} free. They can all be different names, designs and colours, and it keeps going: order ${2*(pr.buy+pr.free)} and get ${2*pr.free} free.`;
+    $("#promoFaq").hidden = false;
+  } else { $("#promoChip").hidden = true; $("#promoFaq").hidden = true; }
+  const prices = activeProducts().map(p => p.price).filter(v => v != null && v !== "");
+  $("#heroPrice").innerHTML = prices.length ? `From <b>${money(Math.min(...prices))}</b> each${pr.enabled ? ` · <span>${esc(pr.label)}</span>` : ""}` : "";
+  $("#cutoffText").textContent = s.christmasCutoff; $("#cutoffFaq").hidden = !s.christmasCutoff;
+  $("#footContact").innerHTML = s.contactEmail ? `Questions? Email <b>${esc(s.contactEmail)}</b>` : "Personalised gifts, made with love.";
+  const closed = !s.shopOpen || !activeProducts().length;
+  $("#closedBox").hidden = !closed; $("#designer").hidden = closed;
+  $("#closedBox").innerHTML = `<img src="elephant.png" alt=""><p>${esc(activeProducts().length ? s.closedMessage : "New designs coming soon!")}</p>`;
+  $("#demoNote").hidden = DB.mode !== "demo";
+}
+function heroArt(){
+  const ps = activeProducts().slice(0, 3), names = ["Charlotte", "Michael", "Lucas"];
+  const looks = [["green","white"],["red","white"],["white","black"]];
+  $("#heroArt").innerHTML = ps.map((p, i) => {
+    const o = p.type === "family" ? {type:"family", productId:p.id, names:["JAN","KEIRA","ANNA","KARLO"], year:"2026", base:"white", text:"white"}
+      : {type:p.type, productId:p.id, style:(activeScenes()[0]||{}).id, base:looks[i][0], text:looks[i][1], name:names[i]};
+    return `<div class="orn"><div class="string"></div>${itemSVG(o)}</div>`;
+  }).join("");
+}
+function snow(){
+  const s = $("#snow"); let h = "";
+  for(let i=0;i<28;i++){ const sz = 3 + Math.random()*5; h += `<i style="left:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-duration:${9+Math.random()*12}s;animation-delay:${-Math.random()*20}s;opacity:${.4+Math.random()*.5}"></i>`; }
+  s.innerHTML = h;
+}
+async function init(){
+  $("#yr").textContent = new Date().getFullYear();
+  try{ await DB.load(); }catch(e){ console.error(e); }
+  // keep only cart items whose product is still for sale
+  cart = store.get("ellie_cart_v2", []).filter(i => activeProducts().find(p => p.id === i.productId));
+  ensureValid(); applySettings(); heroArt(); snow(); renderNames(); renderAll(); renderGallery(); renderCart();
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(() => fitNames()); Promise.all(['700 20px "Dancing Script"','700 20px Poppins','400 20px Chewy','700 20px "Archivo Black"'].map(x => document.fonts.load(x))).then(() => fitNames()).catch(() => {}); }   // name fonts load when first used, so re-centre once they're in
+  $("#loading").style.opacity = 0; setTimeout(() => $("#loading").remove(), 300);
+}
+init();
+</script>
+</body>
+</html>
