@@ -5,13 +5,16 @@
 /* ---------- 1. FIREBASE SETTINGS ----------
    Paste your Firebase web app config here (Firebase console > Project settings > Your apps).
    Leave it as null to run in DEMO MODE: everything is saved in this browser only. */
-const FIREBASE_CONFIG = null;
-/* e.g.
 const FIREBASE_CONFIG = {
-  apiKey: "...", authDomain: "ellie-custom-gifts.firebaseapp.com", projectId: "ellie-custom-gifts",
-  storageBucket: "...", messagingSenderId: "...", appId: "..."
+  apiKey: "AIzaSyA7wPNCH7KvUN2EkHGrFg-VptDukawaDxg",
+  authDomain: "ellie-custom-gifts.firebaseapp.com",
+  projectId: "ellie-custom-gifts",
+  storageBucket: "ellie-custom-gifts.firebasestorage.app",
+  messagingSenderId: "759381286318",
+  appId: "1:759381286318:web:507801a0557c68ffe13c3f",
+  measurementId: "G-LJ71T7VVLF"
 };
-*/
+// (set this back to null to run the site in demo mode, saved in the browser only)
 
 /* ---------- 2. STARTING CATALOGUE (used the first time only; after that, edit in the admin page) ---------- */
 const DEFAULTS = {

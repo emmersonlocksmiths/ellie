@@ -6,7 +6,7 @@ Customer shop: `index.html`  ·  Admin: `admin.html`  ·  Shared code and settin
 
 1. **Firebase project** – console.firebase.google.com › Add project.
 2. **Database** – Databases & Storage › Firestore › Create database (production mode, location `australia-southeast1` Sydney).
-3. **Rules** – Firestore › Rules: paste everything from `firestore.rules`, change `YOUR-ADMIN-EMAIL@example.com` to your admin email, Publish.
+3. **Rules** – Firestore › Rules: paste everything from `firestore.rules`, (your admin email larissaemmerson@outlook.com is already filled in), Publish.
 4. **Admin login** – Security › Authentication › Sign-in method › enable Email/Password, then Users › Add user (your email + a strong password).
 5. **Connect the shop** – Project settings (gear icon) › Your apps › Web `</>` › copy the `firebaseConfig` block into `shared.js` where it says `const FIREBASE_CONFIG = null;`.
 6. **Hosting** – push this folder to the GitHub repository, then Settings › Pages › Deploy from a branch › `main` / root. The shop appears at `https://<username>.github.io/<repo>/`.
